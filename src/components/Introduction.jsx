@@ -1,445 +1,155 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { FiMapPin, FiShield, FiRefreshCw, FiPercent, FiZap, FiArrowRight, FiTrendingUp, FiAward } from "react-icons/fi";
+import React from 'react';
+import { FiChevronRight } from "react-icons/fi";
 
-const Introduction = () => {
-  const sectionRef = useRef(null);
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Scroll animations (only used on desktop)
-  const carX = useSpring(useTransform(scrollYProgress, [0, 1], [-80, 20]), {
-    stiffness: 50,
-    damping: 25
-  });
-
-  const features = [
-    { number: "01", title: "Nationwide Service", desc: "15+ Centers in Nepal", icon: FiMapPin, color: "bg-white" },
-    { number: "02", title: "5-Star Safety", desc: "Euro NCAP Certified", icon: FiShield, color: "bg-[#1A1A1A]/90" },
-    { number: "03", title: "Trade-In Value", desc: "Best Resale Valuation", icon: FiRefreshCw, color: "bg-[#F3EFE7]" },
-    { number: "04", title: "8.9% Interest", desc: "Exclusive Financing", icon: FiPercent, color: "bg-white" },
-    { number: "05", title: "Efficiency Plus", desc: "3-5% More Range", icon: FiZap, color: "bg-[#C7A86D] text-white" }
-  ];
-
-  // Text animation variants
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-    }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const slideIn = {
-    hidden: { opacity: 0, x: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
-    }
-  };
-
-  const isMobile = windowWidth < 768;
-  const isTablet = windowWidth >= 768 && windowWidth < 1024;
-
+const Intro = () => {
   return (
-    <section ref={sectionRef} className="relative bg-gradient-to-br from-[#FCF9F5] via-[#F9F7F2] to-[#F5EFE7] py-20 md:py-28 px-4 sm:px-6 lg:px-12 overflow-hidden">
+    <section className="relative w-full bg-[#f5feff] py-20 lg:py-32 overflow-hidden font-sans">
+      <div className="max-w-[1440px] mx-auto px-10 lg:px-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-0">
 
-      {/* Animated Background Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-20 right-20 w-64 md:w-96 h-64 md:h-96 bg-[#C7A86D]/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.25, 0.15] }}
-          transition={{ duration: 10, repeat: Infinity, delay: 1 }}
-          className="absolute bottom-20 left-20 w-56 md:w-80 h-56 md:h-80 bg-[#C7A86D]/10 rounded-full blur-3xl"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-
-        {/* DESKTOP LAYOUT (Large screens) - COMPLETELY UNCHANGED */}
-        {!isMobile && !isTablet && (
-          <>
-            {/* Branding Header */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="flex items-center gap-4 mb-16"
-            >
-              <motion.div
-                variants={slideIn}
-                transition={{ delay: 0.2 }}
-                className="h-px w-20 bg-gradient-to-r from-[#C7A86D] to-transparent hidden md:block"
-              />
-            </motion.div>
-
-            <div className="flex flex-col lg:flex-row gap-12 items-start">
-              {/* LEFT SIDE */}
-              <div className="w-full lg:w-1/2 relative">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={staggerContainer}
-                  className="max-w-md mb-20 relative z-10"
-                >
-                  <motion.h3 variants={fadeUp} className="text-4xl md:text-5xl font-light text-[#1A1A1A] leading-tight">
-                    Redefining{" "}
-                    <span className="relative inline-block">
-                      <span className="font-bold bg-gradient-to-r from-[#C7A86D] to-[#A67C45] bg-clip-text text-transparent">
-                        Electric Excellence
-                      </span>
-                      
-                    </span>
-                    <br />
-                    in the heart of Nepal.
-                  </motion.h3>
-                </motion.div>
-
-                <div className="relative h-[450px] flex items-center">
-                  <motion.div
-                    initial={{ opacity: 0, x: -120 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 1.2,
-                      delay: 0.2,
-                      ease: [0.25, 0.46, 0.45, 0.94],
-                      type: "spring",
-                      stiffness: 80,
-                      damping: 20
-                    }}
-                    className="relative z-20 w-full"
-                  >
-                    <img
-                      src="/images/intro.png"
-                      alt="Maxus eTerron 9"
-                      className="w-[155%] max-w-none drop-shadow-2xl"
-                    />
-                  </motion.div>
+          {/* --- LEFT COLUMN: Branding & Anniversary --- */}
+          <div className="lg:col-span-7 relative">
+            <div className="flex items-center gap-6 mb-10">
+              <div className="flex items-baseline">
+                <span className="text-8xl font-black text-[#1a1a1c] tracking-tighter">fatcars</span>
+                <div className="ml-1 w-8 h-8 bg-[#6bcf50] rounded-full flex items-center justify-center text-[10px] font-black text-[#1a1a1c]">
+                  .ru
                 </div>
               </div>
+              <span className="text-2xl font-light text-gray-400 tracking-[0.2em] pl-14"> — IS</span>
+            </div>
 
-              {/* RIGHT SIDE - Feature Grid */}
-              <div className="w-full lg:w-1/2">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={{
-                    hidden: { opacity: 0 },
-                    visible: {
-                      opacity: 1,
-                      transition: { staggerChildren: 0.08, delayChildren: 0.2 }
-                    }
-                  }}
-                  className="grid grid-cols-2 gap-4"
-                >
-                  {features.slice(0, 4).map((feature, idx) => {
-                    const Icon = feature.icon;
-                    const isDark = feature.color.includes("bg-[#1A1A1A]");
+            <p className="text-gray-400 text-sm max-w-xs leading-relaxed mb-16 text-left">
+              A civilized market for new cars <br /> and pre-owned cars in Ufa
+            </p>
 
-                    return (
-                      <motion.div
-                        key={idx}
-                        variants={{
-                          hidden: { opacity: 0, y: 40, scale: 0.95 },
-                          visible: {
-                            opacity: 1,
-                            y: 0,
-                            scale: 1,
-                            transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
-                          }
-                        }}
-                        whileHover={{ y: -5, scale: 1.02 }}
-                        transition={{ duration: 0.2 }}
-                        onMouseEnter={() => setHoveredCard(idx)}
-                        onMouseLeave={() => setHoveredCard(null)}
-                        className={`${feature.color} p-6 h-[130px] rounded-xl border border-black/5 flex flex-col justify-between group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden`}
-                      >
-                        <motion.div
-                          whileHover={{ rotate: 360, scale: 1.1 }}
-                          transition={{ duration: 0.4 }}
-                          className="absolute top-4 right-4 opacity-10 group-hover:opacity-30 transition-opacity"
-                        >
-                          <Icon size={24} className={isDark ? "text-white" : "text-[#C7A86D]"} />
-                        </motion.div>
-                        <motion.span
-                          animate={{ x: hoveredCard === idx ? 5 : 0 }}
-                          className={`text-3xl font-light opacity-10 group-hover:opacity-30 transition-opacity ${isDark ? "text-white" : ""}`}
-                        >
-                          {feature.number}
-                        </motion.span>
-                        <div>
-                          <h4 className={`font-bold text-sm mb-1 tracking-tight ${isDark ? "text-white" : "text-[#1A1A1A]"}`}>
-                            {feature.title}
-                          </h4>
-                          <p className={`text-[10px] leading-tight ${isDark ? "text-white/60" : "text-black/50"}`}>
-                            {feature.desc}
-                          </p>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
+            <div className="relative h-[320px]">
+              <div
+                className="absolute -top-4 -left-10 text-[320px] font-black leading-none select-none pointer-events-none opacity-80 text-transparent"
+                style={{
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  backgroundColor: '#cce3f0',
 
-                  <motion.div
-                    variants={{
-                      hidden: { opacity: 0, y: 40, scale: 0.95 },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
-                      }
-                    }}
-                    whileHover={{ y: -5, scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                    className="col-start-2"
-                  >
-                    <div className="bg-gradient-to-r from-[#C7A86D] to-[#B27D48] p-6 h-[130px] rounded-xl text-white flex flex-col justify-between cursor-pointer group shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden">
-                      <motion.div
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute inset-0 bg-white/10 rounded-xl"
-                      />
-                      <div className="flex justify-between items-start relative z-10">
-                        <motion.span whileHover={{ scale: 1.05 }} className="text-2xl font-bold italic">3-5%</motion.span>
-                        <motion.div whileHover={{ rotate: 360, scale: 1.2 }} transition={{ duration: 0.4 }}>
-                          <FiZap size={20} className="text-white/80" />
-                        </motion.div>
-                      </div>
-                      <div className="relative z-10">
-                        <h4 className="font-bold text-sm mb-1">{features[4].title}</h4>
-                        <p className="text-[10px] leading-tight opacity-80">{features[4].desc}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
+                  // Layered background with nicer technical shapes
+                  backgroundImage: `
+      linear-gradient(rgba(204, 227, 240, 0.75), rgba(204, 227, 240, 0.75)),
+      url("data:image/svg+xml,%3Csvg width='280' height='280' viewBox='0 0 280 280' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%237da0b5' stroke-width='3.5' stroke-opacity='0.7'%3E%3C!-- Rounded hexagon --%3E%3Cpath d='M70 40 L100 25 L130 40 L130 70 L100 85 L70 70 Z' /%3E%3C!-- Double rectangle with rotation --%3E%3Crect x='160' y='30' width='45' height='75' rx='12' transform='rotate(12 182 67)' /%3E%3Crect x='165' y='40' width='35' height='55' rx='8' transform='rotate(12 182 67)' /%3E%3C!-- Circle with inner pattern --%3E%3Ccircle cx='220' cy='180' r='28' /%3E%3Ccircle cx='220' cy='180' r='15' stroke-dasharray='4 3' /%3E%3C!-- Modern abstract shape --%3E%3Cpath d='M35 150 L65 135 L95 150 L85 185 L45 185 Z' /%3E%3C!-- Crosshair element --%3E%3Cpath d='M195 225 L235 225 M215 205 L215 245' stroke-width='3' /%3E%3C!-- Rounded square with inset --%3E%3Crect x='10' y='195' width='48' height='48' rx='12' /%3E%3Crect x='18' y='203' width='32' height='32' rx='6' stroke-width='2.5' /%3E%3C!-- Diagonal line pattern --%3E%3Cpath d='M245 85 L270 110 M250 95 L275 120' stroke-width='2.5' stroke-dasharray='5 3' /%3E%3C!-- Small geometric dots --%3E%3Ccircle cx='50' cy='30' r='6' /%3E%3Ccircle cx='180' cy='220' r='5' /%3E%3Ccircle cx='95' cy='185' r='7' /%3E%3Ccircle cx='250' cy='165' r='5.5' /%3E%3Ccircle cx='25' cy='110' r='4.5' /%3E%3C/g%3E%3C/svg%3E")
+    `,
+                  backgroundSize: 'cover, 280px 280px',
+                  backgroundRepeat: 'no-repeat, repeat',
+                }}
+              >
+                10
+              </div>
+
+              <div className="relative z-10 pt-12 pl-48">
+                <h2 className="text-5xl font-bold text-[#1a1a1c] leading-none">years</h2>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.4em] mt-4">
+                  presence in the auto market
+                </p>
+              </div>
+
+              {/* THE CAR: Increased Z-index and width to bleed into the grid */}
+              <div className="absolute top-30 left-0 z-40 w-[130%] max-w-none">
+                <img
+                  src="/images/introcar.png"
+                  alt="Tesla"
+                  className="w-full relative z-10"
+                />
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[80%] h-6 bg-black/10 blur-2xl rounded-[100%] z-0"></div>
               </div>
             </div>
-          </>
-        )}
-
-        {/* TABLET LAYOUT (Medium screens) */}
-        {isTablet && (
-          <div className="flex flex-col">
-            {/* Text Section */}
-            <div className="text-center mb-8">
-              <motion.h3 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-3xl font-light text-[#1A1A1A] leading-tight"
-              >
-                Redefining{" "}
-                <span className="relative inline-block">
-                  <span className="font-bold bg-gradient-to-r from-[#C7A86D] to-[#A67C45] bg-clip-text text-transparent">
-                    Electric Excellence
-                  </span>
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    transition={{ delay: 0.7, duration: 0.6 }}
-                    className="absolute -bottom-2 left-0 h-[2px] bg-gradient-to-r from-[#C7A86D] to-transparent"
-                  />
-                </span>
-                <br />
-                in the heart of Nepal.
-              </motion.h3>
-            </div>
-
-            {/* Car Image */}
-            <div className="relative h-[350px] mb-8 flex items-center justify-center">
-              <motion.div
-                initial={{ opacity: 0, x: -80 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94], type: "spring", stiffness: 80, damping: 20 }}
-                className="relative z-20 w-full"
-              >
-                <img src="/images/intro.png" alt="Maxus eTerron 9" className="w-[100%] max-w-none drop-shadow-2xl -ml-0" />
-              </motion.div>
-            </div>
-
-            {/* Feature Grid */}
-            <div className="w-full">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.2 } }
-                }}
-                className="grid grid-cols-2 gap-4"
-              >
-                {features.slice(0, 4).map((feature, idx) => {
-                  const Icon = feature.icon;
-                  const isDark = feature.color.includes("bg-[#1A1A1A]");
-
-                  return (
-                    <motion.div
-                      key={idx}
-                      variants={fadeUp}
-                      whileHover={{ y: -5, scale: 1.02 }}
-                      onMouseEnter={() => setHoveredCard(idx)}
-                      onMouseLeave={() => setHoveredCard(null)}
-                      className={`${feature.color} p-5 h-[120px] rounded-xl border border-black/5 flex flex-col justify-between group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden`}
-                    >
-                      <div className="absolute top-3 right-3 opacity-10 group-hover:opacity-30 transition-opacity">
-                        <Icon size={22} className={isDark ? "text-white" : "text-[#C7A86D]"} />
-                      </div>
-                      <span className={`text-2xl font-light opacity-10 ${isDark ? "text-white" : ""}`}>{feature.number}</span>
-                      <div>
-                        <h4 className={`font-bold text-sm mb-1 tracking-tight ${isDark ? "text-white" : "text-[#1A1A1A]"}`}>{feature.title}</h4>
-                        <p className={`text-[10px] leading-tight ${isDark ? "text-white/60" : "text-black/50"}`}>{feature.desc}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-
-                <motion.div variants={fadeUp} className="col-start-2">
-                  <div className="bg-gradient-to-r from-[#C7A86D] to-[#B27D48] p-5 h-[120px] rounded-xl text-white flex flex-col justify-between cursor-pointer group shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden">
-                    <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }} className="absolute inset-0 bg-white/10 rounded-xl" />
-                    <div className="flex justify-between items-start relative z-10">
-                      <span className="text-xl font-bold italic">3-5%</span>
-                      <FiZap size={18} className="text-white/80" />
-                    </div>
-                    <div className="relative z-10">
-                      <h4 className="font-bold text-sm mb-1">{features[4].title}</h4>
-                      <p className="text-[10px] leading-tight opacity-80">{features[4].desc}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
           </div>
-        )}
 
-        {/* MOBILE LAYOUT (Small screens) */}
-        {isMobile && (
-          <div className="flex flex-col">
-            {/* Text Section */}
-            <div className="text-center mb-6">
-              <motion.h3 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-2xl font-light text-[#1A1A1A] leading-tight"
-              >
-                Redefining{" "}
-                <span className="relative inline-block">
-                  <span className="font-bold bg-gradient-to-r from-[#C7A86D] to-[#A67C45] bg-clip-text text-transparent">
-                    Electric Excellence
-                  </span>
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "100%" }}
-                    transition={{ delay: 0.7, duration: 0.6 }}
-                    className="absolute -bottom-2 left-0 h-[2px] bg-gradient-to-r from-[#C7A86D] to-transparent"
-                  />
-                </span>
-                <br />
-                in the heart of Nepal.
-              </motion.h3>
+          {/* --- RIGHT COLUMN: SERVICE GRID --- */}
+          {/* Removed background color here to prevent covering the car */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-0 relative z-40 border-t  border-gray-100">
+
+            {/* 01: Sales */}
+            <div className="bg-white p-6 border-b border-r border-gray-100 flex flex-col justify-between h-[150px] relative overflow-hidden">
+              <div>
+                <h4 className="text-[12px] font-bold text-[#1a1a1c] mb-2 uppercase leading-tight text-left">
+                  Sale of cars <br /> in stock with Title
+                </h4>
+                <p className="text-[10px] text-gray-400 leading-snug text-left">
+                  More than 100 new cars in stock with Title and over 100 pre-owned cars.
+                </p>
+              </div>
+              <span className="absolute -bottom-2 right-6 text-5xl text-gray-400/50 translate-x-1/4 translate-y-1/4">
+                01
+              </span>
             </div>
 
-            {/* Car Image */}
-            <div className="relative h-[250px] mb-6 flex items-center justify-center">
-              <motion.div
-                initial={{ opacity: 0, x: -60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94], type: "spring", stiffness: 80, damping: 20 }}
-                className="relative z-20 w-full"
-              >
-                <img src="/images/intro.png" alt="Maxus eTerron 9" className="w-[100%] max-w-none drop-shadow-2xl -ml-0" />
-              </motion.div>
+            {/* 02: Commission */}
+            <div className="bg-[#1a1a1c] p-6 border-b border-gray-100 flex flex-col justify-between h-[150px] relative overflow-hidden">
+              <div>
+                <h4 className="text-[12px] font-bold text-white mb-2 uppercase leading-tight text-left">
+                  Free listing of <br /> cars for commission
+                </h4>
+                <p className="text-[10px] text-gray-500 leading-snug text-left">
+                  Fast sale of your car — in average from 3 to 23 days.
+                </p>
+              </div>
+              <span className="absolute -bottom-2 right-6 text-5xl text-white/20 translate-x-1/4 translate-y-1/4">
+                02
+              </span>
             </div>
 
-            {/* Feature Grid */}
-            <div className="w-full">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.2 } }
-                }}
-                className="grid grid-cols-2 gap-3"
-              >
-                {features.slice(0, 4).map((feature, idx) => {
-                  const Icon = feature.icon;
-                  const isDark = feature.color.includes("bg-[#1A1A1A]");
-
-                  return (
-                    <motion.div
-                      key={idx}
-                      variants={fadeUp}
-                      whileHover={{ y: -5, scale: 1.02 }}
-                      onMouseEnter={() => setHoveredCard(idx)}
-                      onMouseLeave={() => setHoveredCard(null)}
-                      className={`${feature.color} p-3 h-[100px] rounded-xl border border-black/5 flex flex-col justify-between group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden`}
-                    >
-                      <div className="absolute top-2 right-2 opacity-10 group-hover:opacity-30 transition-opacity">
-                        <Icon size={18} className={isDark ? "text-white" : "text-[#C7A86D]"} />
-                      </div>
-                      <span className={`text-xl font-light opacity-10 ${isDark ? "text-white" : ""}`}>{feature.number}</span>
-                      <div>
-                        <h4 className={`font-bold text-xs mb-1 tracking-tight ${isDark ? "text-white" : "text-[#1A1A1A]"}`}>{feature.title}</h4>
-                        <p className={`text-[8px] leading-tight ${isDark ? "text-white/60" : "text-black/50"}`}>{feature.desc}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-
-                <motion.div variants={fadeUp} className="col-span-2">
-                  <div className="bg-gradient-to-r from-[#C7A86D] to-[#B27D48] p-3 h-[100px] rounded-xl text-white flex flex-col justify-between cursor-pointer group shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden">
-                    <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }} className="absolute inset-0 bg-white/10 rounded-xl" />
-                    <div className="flex justify-between items-start relative z-10">
-                      <span className="text-lg font-bold italic">3-5%</span>
-                      <FiZap size={16} className="text-white/80" />
-                    </div>
-                    <div className="relative z-10">
-                      <h4 className="font-bold text-xs mb-1">{features[4].title}</h4>
-                      <p className="text-[8px] leading-tight opacity-80">{features[4].desc}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
+            {/* 03: Trade-In */}
+            <div className="bg-[#cce3f0] p-6 border-b border-r border-gray-100 flex flex-col justify-between h-[150px] relative overflow-hidden">
+              <div>
+                <h4 className="text-[12px] font-bold text-[#1a1a1c] mb-2 uppercase leading-tight text-left">
+                  Adequate TRADE-IN <br /> or car buyout
+                </h4>
+                <p className="text-[10px] text-gray-500 leading-snug text-left">
+                  We honestly evaluate your car based on objective criteria.
+                </p>
+              </div>
+              <span className="absolute -bottom-2 right-6 text-5xl text-gray-300/50 translate-x-1/4 translate-y-1/4">
+                03
+              </span>
             </div>
+
+            {/* 04: Credit */}
+            <div className="bg-white p-6 border-b border-gray-100 flex flex-col justify-between h-[150px] relative overflow-hidden">
+              <div>
+                <h4 className="text-[12px] font-bold text-[#1a1a1c] mb-2 uppercase leading-tight text-left">
+                  Purchase of a car <br /> on credit
+                </h4>
+                <p className="text-[10px] text-gray-400 leading-snug text-left">
+                  Convenient loan application in one place without down payment.
+                </p>
+              </div>
+              <span className="absolute -bottom-2 right-6 text-5xl text-gray-400/50 translate-x-1/4 translate-y-1/4">
+                04
+              </span>
+            </div>
+
+            {/* 05: THE EMPTY SPACE (Window for the Car) */}
+            <div className="h-[150px] bg-transparent pointer-events-none"></div>
+
+            {/* 06: Pricing */}
+            <div className="bg-[#6bcf50] p-6 border-b border-gray-100 flex flex-col justify-between h-[150px] group cursor-pointer hover:bg-[#5dbd44] transition-all relative overflow-hidden">
+              <div>
+                <h4 className="text-[11px] font-bold text-white mb-2 uppercase leading-tight text-left">
+                  The cost of new cars <br /> is below dealer prices by
+                </h4>
+                <div className="flex items-center justfy-center text-white">
+                  <FiChevronRight className="text-4xl -ml-2 group-hover:translate-x-1 transition-transform" />
+                  <span className="text-7xl font-black tracking-tighter">3-5%</span>
+                </div>
+              </div>
+              <span className="absolute -bottom-2 right-6 text-5xl text-white/20 translate-x-1/4 translate-y-1/4">
+                05
+              </span>
+            </div>
+
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
 };
 
-export default Introduction;
+export default Intro;

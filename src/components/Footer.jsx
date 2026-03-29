@@ -1,138 +1,116 @@
-import React from "react";
-import { motion } from "framer-motion";
-import {
-    FiInstagram,
-    FiFacebook,
-    FiYoutube,
-    FiArrowUpRight,
-    FiMapPin,
-    FiPhone,
-    FiMail,
-} from "react-icons/fi";
+import React from 'react';
+import { IoPersonOutline, IoCallOutline } from 'react-icons/io5';
 
 const Footer = () => {
     return (
-        <footer className="relative bg-white border-t border-slate-200 pt-8 md:pt-10 pb-4 overflow-hidden">
+        <div className="relative font-sans">
+            {/* 1. CONTACT SECTION WITH MOUNTAIN BACKGROUND */}
+            <section
 
-            {/* Top Accent Glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 md:w-40 h-px bg-gradient-to-r from-transparent via-[#C7A86D] to-transparent" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 md:w-96 h-16 md:h-20 bg-[#C7A86D]/10 blur-3xl rounded-full" />
+                className="relative z-30 min-h-[600px] flex items-center justify-center bg-cover bg-center px-4 py-20"
+                style={{
+                    backgroundColor: '#f5feff',
+                    backgroundImage: "url('/images/footerbg.png')",
+                    WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
+                    maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 100%)',
+                }}
+            >
+                {/* Frosted Glass Card */}
+                <div className="relative z-50 w-full max-w-[1000px] bg-white/20 backdrop-blur-md rounded-[40px] p-8  shadow-2xl border border-white/30 overflow-visible">
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                {/* MAIN GRID */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 pb-4">
-
-                    {/* BRAND SECTION */}
-                    <div className="lg:col-span-5 text-center lg:text-left">
-                        <div className="flex justify-center lg:justify-start">
-                            <div className="bg-slate-900/90 backdrop-blur-md p-2 md:p-3 rounded-xl inline-block shadow-lg">
-                                <img
-                                    src="/images/logo.png"
-                                    alt="Logo"
-                                    className="h-6 md:h-8 w-auto object-contain"
-                                />
-                            </div>
-                        </div>
-                        <div className="w-10 md:w-12 h-px bg-[#C7A86D] mt-4 md:mt-6 mb-4 md:mb-6 mx-auto lg:mx-0" />
-
-                        {/* Social Icons */}
-                        <div className="flex gap-4 md:gap-5 mt-6 md:mt-8 items-center justify-center lg:justify-start">
-                            {[FiInstagram, FiFacebook, FiYoutube].map((Icon, i) => (
-                                <motion.a
-                                    key={i}
-                                    href="#"
-                                    whileHover={{ y: -4, scale: 1.1 }}
-                                    className="text-slate-400 hover:text-[#C7A86D] transition duration-300"
-                                >
-                                    <Icon size={16} className="md:size-[18px]" />
-                                </motion.a>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* LOCATION SECTION */}
-                    <div className="lg:col-span-3 lg:border-l lg:border-slate-200 lg:pl-10 text-center lg:text-left">
-                        <p className="text-[#C7A86D] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-4 md:mb-6">
-                            Corporate Hub
+                    <div className="max-w-[600px] px-12">
+                        <h2 className="text-[#1a2b3c] text-[32px] font-medium mb-4 leading-tight text-left">
+                            — Still have questions? Get a free consultation!
+                        </h2>
+                        <p className="text-[#1a2b3c]/70 text-[16px] mb-12 text-left">
+                            A specialist will call you back within 3 minutes and answer your question
                         </p>
 
-                        <div className="flex gap-3 md:gap-4 items-start justify-center lg:justify-start">
-                            <FiMapPin className="text-[#C7A86D] mt-1 flex-shrink-0" size={14} className="md:size-[16px]" />
-                            <div>
-                                <p className="text-slate-800 text-xs md:text-sm font-semibold">
-                                    Paramount Motors Pvt. Ltd.
-                                </p>
-                                <p className="text-slate-500 text-[10px] md:text-xs mt-1 leading-relaxed">
-                                    Naxal, Kathmandu, Nepal
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                        <form className="space-y-4 ">
+                            <div className="flex flex-col md:flex-row gap-4">
+                                {/* Name Input */}
+                                <div className="relative flex-1">
+                                    <IoPersonOutline className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+                                    <input
+                                        type="text"
+                                        placeholder="Your name"
+                                        className="w-3xs h-[64px] pl-16 pr-6 bg-white rounded-full text-[#1a2b3c] focus:outline-none shadow-sm"
+                                    />
+                                </div>
 
-                    {/* CONTACT SECTION */}
-                    <div className="lg:col-span-4 lg:border-l lg:border-slate-200 lg:pl-10 text-center lg:text-left">
-                        <p className="text-[#C7A86D] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-4 md:mb-6">
-                            Direct Line
-                        </p>
-
-                        <div className="flex flex-col gap-4 md:gap-6 items-center lg:items-start">
-                            <div className="flex gap-3 md:gap-4 items-center justify-center lg:justify-start">
-                                <FiPhone className="text-[#C7A86D] flex-shrink-0" size={14} className="md:size-[16px]" />
-                                <div>
-                                    <p className="text-slate-900 text-sm md:text-base font-semibold">
-                                        +977 1 4412345
-                                    </p>
-                                    <p className="text-slate-400 text-[8px] md:text-[9px] uppercase tracking-wider">
-                                        Sales & Inquiries
-                                    </p>
+                                {/* Phone Input */}
+                                <div className="relative flex-1">
+                                    <IoCallOutline className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+                                    <input
+                                        type="tel"
+                                        placeholder="+7 (___) ___ - __ - __"
+                                        className="w-3xs h-[64px] pl-16 pr-6 bg-white rounded-full text-[#1a2b3c] focus:outline-none shadow-sm"
+                                    />
                                 </div>
                             </div>
 
-                            <div className="flex gap-3 md:gap-4 items-center justify-center lg:justify-start">
-                                <FiMail className="text-[#C7A86D] flex-shrink-0" size={14} className="md:size-[16px]" />
-                                <div>
-                                    <p className="text-slate-800 text-xs md:text-sm">
-                                        info@maxusnepal.com
-                                    </p>
-                                    <p className="text-slate-400 text-[8px] md:text-[9px] uppercase tracking-wider">
-                                        Support
-                                    </p>
-                                </div>
+                            {/* Submit Button */}
+                            <div className='relative flex items-start '>
+                                <button className="h-[64px] w-3xs bg-gradient-to-b from-[#73b53a] to-[#96d65a] text-white rounded-full uppercase text-[13px] font-bold tracking-widest hover:bg-[#7bc74d] transition-all shadow-lg">
+                                    Get a consultation
+                                </button>
                             </div>
-                        </div>
+
+                            {/* Privacy Check */}
+                            <div className="flex items-start gap-3 text-[12px] text-[#1a2b3c]/50 pt-4">
+                                <div className="w-4 h-4 rounded-full border border-[#88d958] flex items-center justify-center mt-0.5">
+                                    <div className="w-2 h-2 bg-[#88d958] rounded-full" />
+                                </div>
+                                <p>I give my consent to the processing of personal data</p>
+                            </div>
+                        </form>
                     </div>
-                </div>
 
-                {/* BOTTOM BAR */}
-                <div className="pt-4 md:pt-6 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
-                    <p className="text-slate-400 text-[9px] md:text-[10px] tracking-wider text-center md:text-left">
-                        © 2026 Maxus Nepal. All Rights Reserved.
-                    </p>
-
-                    <motion.a
-                        href="https://saitsolution.com.np"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ x: 4 }}
-                        className="flex items-center gap-1 text-slate-500 hover:text-[#C7A86D] transition text-[9px] md:text-[10px] group"
-                    >
-                        <span>Crafted by</span>
-                        <span className="font-medium">S.A.I.T Solution Nepal</span>
-                        <FiArrowUpRight
-                            size={9}
-                            className="md:size-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                    <div className="absolute -right-[10%] -bottom-[10%] w-[65%] hidden lg:block select-none pointer-events-none transition-all duration-500">
+                        <img
+                            src="/images/footercar.png"
+                            alt="Car branding"
+                            className="w-full h-auto drop-shadow-[0_50px_50px_rgba(0,0,0,0.4)]"
                         />
-                    </motion.a>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            {/* Bottom Accent */}
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C7A86D]/20 to-transparent" />
+            {/* 2. MAIN FOOTER DARK AREA */}
+           <footer className="bg-[#1e2125] py-1 px-6 lg:px-24 border-t border-white/5">
+  <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+    
+    {/* Logo - Centered */}
+    <div className="flex justify-center ">
+      <div className="w-56 h-56 rounded-lg overflow-hidden">
+        <img
+          src="/images/logo2.png"
+          alt="Fatcars Icon"
+          className="w-full h-full object-contain"
+        />
+      </div>
+    </div>
 
-            {/* Soft Decorative Glow */}
-            <div className="absolute bottom-0 right-0 w-48 md:w-72 h-48 md:h-72 bg-[#C7A86D]/10 blur-3xl rounded-full pointer-events-none" />
-        </footer>
+    {/* Address - Centered */}
+    <div className="text-center">
+      <span className="text-white/30 text-[11px] uppercase tracking-widest block mb-2">
+        Showroom address:
+      </span>
+      <p className="text-white text-[16px] font-medium">Ufa, ul. Lenina 52</p>
+      <span className="text-white/30 text-[11px] block mt-1">Mon-Fri: 10:00–19:00</span>
+    </div>
+
+    {/* Contact - Centered */}
+    <div className="text-center ">
+      <span className="text-white/30 text-[11px] uppercase tracking-widest block mb-2">
+        For all questions:
+      </span>
+      <p className="text-white text-[20px] font-medium">+7 (987) 095-11-11</p>
+      <span className="text-white/30 text-[11px] block mt-1">Mon-Fri: 10:00–19:00</span>
+    </div>
+  </div>
+</footer>
+        </div>
     );
 };
 

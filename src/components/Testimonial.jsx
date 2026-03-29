@@ -1,245 +1,142 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { FiMessageSquare, FiStar, FiMap, FiArrowRight, FiUser, FiCompass } from "react-icons/fi";
-import { TbQuote } from "react-icons/tb";
+import React, { useState } from 'react';
+import { IoChevronBack, IoChevronForward, IoPlay } from 'react-icons/io5';
 
 const Testimonial = () => {
-  const containerRef = useRef(null);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Premium scroll effects with spring
-  const imageScale = useSpring(useTransform(scrollYProgress, [0, 1], [1, 1.15]), {
-    stiffness: 40,
-    damping: 25
-  });
-  
-  const textY = useSpring(useTransform(scrollYProgress, [0, 1], [80, -80]), {
-    stiffness: 45,
-    damping: 30
-  });
-  
-  const opacity = useSpring(useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]), {
-    stiffness: 50,
-    damping: 30
-  });
-  
-  const glowOpacity = useSpring(useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 0.6, 0.6, 0]), {
-    stiffness: 45,
-    damping: 25
-  });
-
-  const testimonials = [
+  const reviews = [
     {
-      quote: "The eTerron 9 didn't just handle the Thorang La Pass; it redefined what I thought was possible for an EV in the Himalayas.",
-      author: "Utsav Poudel",
-      role: "Tech Explorer & EV Enthusiast",
-      location: "Upper Mustang, Nepal",
-      rating: 5,
-      image: "/images/testimonial-1.jpg"
+      name: "Andrei Zhukov",
+      text: "It has long been found that when evaluating the design and composition, the readable text interferes with concentration. Lorem Ipsum is used because it provides a more or less standard template filling.",
+      image: "https://randomuser.me/api/portraits/men/1.jpg"
     },
     {
-      quote: "Driving through the winding roads of Pokhara, the silence of the MIFA 7 was surreal. Pure luxury meets sustainability.",
-      author: "Srijana Thapa",
-      role: "Travel Blogger",
-      location: "Pokhara, Nepal",
-      rating: 5,
-      image: "/images/testimonial-2.jpg"
+      name: "Elena Popova",
+      text: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+      image: "https://randomuser.me/api/portraits/women/2.jpg"
     },
     {
-      quote: "As a business owner, the MIFA 9's executive comfort and zero emissions make it the perfect fleet vehicle for Kathmandu.",
-      author: "Rajesh Shrestha",
-      role: "Business Executive",
-      location: "Kathmandu, Nepal",
-      rating: 5,
-      image: "/images/testimonial-3.jpg"
+      name: "Ivan Ivanov",
+      text: "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+      image: "https://randomuser.me/api/portraits/men/3.jpg"
     }
   ];
 
-  // Auto-rotate testimonials
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // Logic to get circular indices for prev/next content
+  const prevIndex = (currentIndex - 1 + reviews.length) % reviews.length;
+  const nextIndex = (currentIndex + 1) % reviews.length;
 
-  const currentTestimonial = testimonials[activeTestimonial];
-  const isMobile = windowWidth < 768;
+  const nextSlide = () => setCurrentIndex(nextIndex);
+  const prevSlide = () => setCurrentIndex(prevIndex);
+
+  // Reusable Side Card Component with actual data
+  const SideCard = ({ position, data }) => (
+    <div className={`absolute ${position === 'left' ? 'left-0 -translate-x-[65%]' : 'right-0 translate-x-[65%]'} 
+      z-10 w-[800px] h-[280px] bg-[#1e2125] rounded-[32px] opacity-50 scale-[0.85] 
+      hidden lg:flex items-center p-12 pointer-events-none border border-white/50 transition-all duration-500`}>
+
+      <div className="w-32 h-32 rounded-[32px] overflow-hidden grayscale opacity-40 shrink-0">
+        <img src={data.image} alt="" className="w-full h-full object-cover" />
+      </div>
+
+      <div className="ml-8 flex-1">
+        <h4 className="text-white/60 text-xl font-medium mb-3">{data.name}</h4>
+        <p className="text-white/40 text-sm line-clamp-3 leading-relaxed">
+          {data.text}
+        </p>
+      </div>
+    </div>
+  );
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-[#2C2C2C] to-[#1E1E1E]">
-      
-      {/* Premium Background Elements */}
-      <div className="absolute inset-0">
-        {/* Abstract Light Orbs */}
-        <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2], x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 12, repeat: Infinity }}
-          className="absolute top-1/4 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#C7A86D]/15 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.35, 0.15], x: [0, -40, 0], y: [0, -20, 0] }}
-          transition={{ duration: 15, repeat: Infinity, delay: 2 }}
-          className="absolute bottom-1/4 left-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-[#C7A86D]/15 rounded-full blur-3xl"
-        />
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[url('/images/grid-dark.png')] opacity-10" />
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1E1E1E] via-transparent to-transparent" />
-      </div>
+    <section className="bg-[#f5feff] py-24 px-4 font-sans relative overflow-hidden">
+      <h2 className="text-center text-[#1a2b3c] text-[42px] font-normal tracking-tight">
+        Satisfied clients about us
+      </h2>
 
-      {/* Animated Particles - Reduced on mobile */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(isMobile ? 25 : 50)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight }}
-            animate={{ y: [null, -200], opacity: [0, 0.4, 0] }}
-            transition={{ duration: Math.random() * 8 + 6, repeat: Infinity, delay: Math.random() * 5 }}
-            className="absolute w-0.5 h-0.5 bg-[#C7A86D]/40 rounded-full"
-          />
-        ))}
-      </div>
+      <div className="relative flex items-center justify-center max-w-[1600px] mx-auto h-[550px]">
 
-      {/* Main Content */}
-      <div className="relative z-20 h-full flex items-center justify-center px-4 md:px-6">
-        <div className="max-w-6xl mx-auto w-full">
-          
-          {/* Header with Animated Line */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8 md:mb-12"
-          >
-            <div className="inline-flex items-center gap-3 mb-4">
-              <div className="w-6 md:w-8 h-px bg-[#C7A86D]" />
-              <span className="text-[#C7A86D] text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold">Real Stories</span>
-              <div className="w-6 md:w-8 h-px bg-[#C7A86D]" />
-            </div>
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-light text-white">
-              Voices from the{" "}
-              <span className="font-bold bg-gradient-to-r from-[#C7A86D] to-[#E5B85C] bg-clip-text text-transparent">
-                Himalayas
-              </span>
-            </h2>
-          </motion.div>
+        {/* Navigation Arrows */}
+        <button onClick={prevSlide} className="absolute left-[18%] z-50 w-[60px] h-[60px] bg-[#88d958] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 active:scale-95 transition-all">
+          <IoChevronBack size={28} />
+        </button>
 
-          {/* Main Testimonial Card */}
-          <motion.div
-            style={{ y: textY, opacity }}
-            className="relative"
-          >
-            <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl overflow-hidden">
-              
-              {/* Animated Glow Effect */}
-              <motion.div
-                style={{ opacity: glowOpacity }}
-                className="absolute inset-0 bg-gradient-to-r from-[#C7A86D]/10 via-transparent to-[#C7A86D]/10 pointer-events-none"
+        <div className="relative flex items-center justify-center w-full h-full">
+
+          {/* Side Cards displaying actual data from the array */}
+          <SideCard position="left" data={reviews[prevIndex]} />
+          <SideCard position="right" data={reviews[nextIndex]} />
+
+          {/* ACTIVE CENTER GROUP */}
+          <div className="relative z-30 flex items-center justify-center w-full lg:w-[740px] h-[420px]">
+
+            {/* Back wide card decorative layer */}
+            <div className="absolute z-10 w-full h-[320px] bg-[#393942] rounded-[32px] opacity-40 shadow-xl" />
+
+            {/* Front main card */}
+            <div className="relative z-20 w-[75%] lg:w-[680px] h-full bg-[#1e2125] rounded-[32px] p-10 lg:p-16 shadow-[0_50px_100px_rgba(0,0,0,0.5)] flex flex-col lg:flex-row gap-12 items-center border border-white/5 overflow-hidden group">
+
+              {/* --- THE LARGE BACKGROUND SHAPES --- */}
+              <div
+                className="absolute inset-0 opacity-[0.035] pointer-events-none select-none z-0 transition-transform duration-700 group-hover:scale-105"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='1000' height='900' viewBox='0 0 1000 900' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='4' stroke-opacity='0.4'%3E%3C!-- Hexagon shape --%3E%3Cpath d='M500 80 L620 150 L620 290 L500 360 L380 290 L380 150 Z' stroke-opacity='0.5' /%3E%3C!-- Large rounded rectangle with rotation --%3E%3Crect x='600' y='400' width='320' height='420' rx='70' transform='rotate(12 760 610)' stroke-opacity='0.35' /%3E%3C!-- Double circle pattern --%3E%3Ccircle cx='200' cy='650' r='120' stroke-opacity='0.45' /%3E%3Ccircle cx='200' cy='650' r='55' stroke-opacity='0.3' stroke-dasharray='8 6' /%3E%3C!-- Organic blob shape --%3E%3Cpath d='M750 120 C800 100, 860 110, 890 150 C920 190, 910 240, 880 270 C850 300, 800 290, 770 260 C740 230, 730 180, 750 120Z' stroke-opacity='0.4' /%3E%3C!-- Elegant wave line --%3E%3Cpath d='M50 280 C150 240, 250 320, 350 300 C450 280, 550 220, 650 240 C750 260, 850 300, 950 280' stroke-width='3' stroke-dasharray='12 8' stroke-opacity='0.3' /%3E%3C!-- Modern abstract shape --%3E%3Crect x='80' y='120' width='220' height='220' rx='50' transform='rotate(-8 190 230)' stroke-opacity='0.38' /%3E%3C!-- Decorative small circles --%3E%3Ccircle cx='850' cy='700' r='32' stroke-opacity='0.42' /%3E%3Ccircle cx='900' cy='780' r='18' stroke-opacity='0.35' /%3E%3Ccircle cx='70' cy='800' r='28' stroke-opacity='0.4' /%3E%3Ccircle cx='920' cy='180' r='24' stroke-opacity='0.38' /%3E%3Ccircle cx='40' cy='400' r='20' stroke-opacity='0.32' /%3E%3C!-- Cross shape pattern --%3E%3Cpath d='M280 720 L340 720 M310 690 L310 750' stroke-width='3' stroke-opacity='0.28' /%3E%3Cpath d='M820 520 L870 520 M845 495 L845 545' stroke-width='2.5' stroke-opacity='0.25' /%3E%3C/g%3E%3C/svg%3E")`,
+                  backgroundSize: '1100px 1000px',
+                  backgroundPosition: '100px -120px',
+                  backgroundRepeat: 'no-repeat'
+                }}
               />
-              
-              {/* Decorative Quote Icon - Hidden on mobile */}
-              {!isMobile && (
-                <>
-                  <div className="absolute top-6 right-6 md:top-8 md:right-8 opacity-10">
-                    <TbQuote className="text-6xl md:text-8xl text-white" />
+              {/* --- THE GREEN QUOTES --- */}
+              <div className="absolute top-10 right-12 text-[#88d958] opacity-90 z-20">
+                <svg width="70" height="50" viewBox="0 0 60 45" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M22 0H0V22H11C11 31 6 38 0 41V45C13 42 22 30 22 15V0Z" />
+                  <path d="M58 0H36V22H47C47 31 42 38 36 41V45C49 42 58 30 58 15V0Z" />
+                </svg>
+              </div>
+
+              {/* --- CARD CONTENT --- */}
+              <div className="relative z-10 flex flex-col lg:flex-row gap-12 items-center">
+
+                <div className="flex flex-col items-start gap-6 min-w-[240px]">
+                  <div className="w-[190px] h-[190px] rounded-[40px] overflow-hidden border-[6px] border-white/5 shadow-2xl transition-all duration-500">
+                    <img src={reviews[currentIndex].image} className="w-full h-full object-cover" alt={reviews[currentIndex].name} />
                   </div>
-                  <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 opacity-10 rotate-180">
-                    <TbQuote className="text-6xl md:text-8xl text-white" />
-                  </div>
-                </>
-              )}
-              
-              {/* Rating Stars */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="flex justify-center gap-1 mb-6 md:mb-8"
-              >
-                {[...Array(currentTestimonial.rating)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3 + i * 0.1 }}
-                  >
-                    <FiStar className="text-[#C7A86D] fill-[#C7A86D] text-base md:text-lg" />
-                  </motion.div>
-                ))}
-              </motion.div>
-              
-              {/* Quote Text */}
-              <motion.blockquote
-                key={activeTestimonial}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className={`text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light text-white leading-tight text-center mb-6 md:mb-10 ${isMobile ? 'px-2' : 'px-4'}`}
-              >
-                        "{currentTestimonial.quote}"
-              </motion.blockquote>
-              
-              {/* Author Info */}
-              <motion.div
-                key={`author-${activeTestimonial}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
-                className="flex flex-col items-center gap-2 md:gap-3"
-              >
-                <div className="w-10 md:w-12 h-[1px] bg-gradient-to-r from-transparent via-[#C7A86D] to-transparent" />
-                <p className="text-white font-bold tracking-wider text-sm md:text-base uppercase">{currentTestimonial.author}</p>
-                <p className="text-white/50 text-[10px] md:text-xs tracking-[0.2em] uppercase">{currentTestimonial.role}</p>
-                <div className="flex items-center gap-2 mt-1 md:mt-2">
-                  <FiMap className="text-[#C7A86D] text-[10px] md:text-xs" />
-                  <span className="text-white/40 text-[8px] md:text-[10px] uppercase tracking-wider">{currentTestimonial.location}</span>
+
+                  <button className="flex items-center gap-3 group/play">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#1e2125] group-hover/play:bg-[#88d958] group-hover/play:text-white transition-all">
+                      <IoPlay size={18} className="ml-1" />
+                    </div>
+                    <div className="flex flex-col items-start uppercase leading-none">
+                      <span className="text-white text-[13px] font-medium tracking-widest">watch</span>
+                      <span className="text-white/40 text-[10px] tracking-[0.2em] border-b border-white/20 mt-1 pb-1">video review</span>
+                    </div>
+                  </button>
                 </div>
-              </motion.div>
-            </div>
-          </motion.div>
 
-          {/* Navigation Dots */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex justify-center gap-2 md:gap-3 mt-6 md:mt-8"
-          >
-            {testimonials.map((_, idx) => (
-              <motion.button
-                key={idx}
-                onClick={() => setActiveTestimonial(idx)}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                className={`transition-all duration-300 rounded-full ${
-                  activeTestimonial === idx 
-                    ? 'w-6 md:w-8 h-1.5 md:h-2 bg-[#C7A86D]' 
-                    : 'w-1.5 h-1.5 md:w-2 md:h-2 bg-white/30 hover:bg-white/50'
-                }`}
-              />
-            ))}
-          </motion.div>
+                <div className="flex-1 text-left pt-2 transition-all duration-500">
+                  <h3 className="text-white text-[28px] font-medium mb-6 tracking-tight">
+                    {reviews[currentIndex].name}
+                  </h3>
+                  <p className="text-gray-400 text-[16px] leading-[1.8] font-light max-w-[480px]">
+                    {reviews[currentIndex].text}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
+
+        <button onClick={nextSlide} className="absolute right-[18%] z-50 w-[60px] h-[60px] bg-[#88d958] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 active:scale-95 transition-all">
+          <IoChevronForward size={28} />
+        </button>
       </div>
 
-      
-      
+      <div className="text-center mt-16 text-[#1a2b3c] text-[32px] font-light tracking-tighter">
+        <span className="font-semibold">0{currentIndex + 1}</span>
+        <span className="text-gray-300 mx-4 font-extralight">/</span>
+        <span className="text-gray-300 text-[22px]">0{reviews.length}</span>
+      </div>
     </section>
   );
 };

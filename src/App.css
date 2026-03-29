@@ -192,18 +192,26 @@
   }
 }
 
-h1,
-h2,
-h3,
-button {
-  font-family: "Archivo";
+/* 1. HEADINGS: Thick, circular, and tight */
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; /* ExtraBold to match "FatCars" logo feel */
+  letter-spacing: -0.04em; /* This "pinches" the letters for a premium look */
+  line-height: 1.1;
 }
 
-a,
-p,
-span,
-input,
-select,
-option {
-  font-family: "Inter";
+/* 2. BUTTONS: Wide and Powerful */
+button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; 
+  text-transform: uppercase;
+  letter-spacing: 0.15em; /* Creates the wide look in the green buttons */
 }
+
+/* 3. BODY & INPUTS: Clean and airy */
+p, span, input, select, a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; /* Regular weight for the description text */
+  letter-spacing: -0.01em;
+}
+

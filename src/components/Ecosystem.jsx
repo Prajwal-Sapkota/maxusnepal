@@ -1,142 +1,160 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { FiZap, FiBattery, FiTrendingUp, FiArrowRight, FiCloud, FiStar } from "react-icons/fi";
+import React from 'react';
+import { FiChevronDown, FiChevronRight, FiPhone } from "react-icons/fi";
+
+const BankLogo = ({ name }) => (
+    <div className="flex items-center gap-2 text-[#2c323a]/60 text-[10px] font-bold grayscale opacity-70 hover:grayscale-0 transition-all cursor-default">
+        <div className="w-4 h-4 bg-black/10 rounded-sm" />
+        {name}
+    </div>
+);
+
+const SelectField = ({ label }) => (
+    <div className="relative">
+        <select className="w-full h-[54px] bg-[#393f4a] border border-white/5 rounded-full px-6 text-white/40 text-[13px] font-light appearance-none outline-none focus:border-[#b2f55d]/30 transition-colors cursor-pointer">
+            <option>{label}</option>
+        </select>
+        <FiChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" />
+    </div>
+);
 
 const Ecosystem = () => {
-    const sectionRef = useRef(null);
-    const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
-
-    useEffect(() => {
-        const handleResize = () => setWindowWidth(window.innerWidth);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    const features = [
-        { icon: FiZap, value: "15+", label: "Charging Stations" },
-        { icon: FiBattery, value: "30 min", label: "Fast Charge" },
-        { icon: FiTrendingUp, value: "70%", label: "Lower Cost" },
-        { icon: FiCloud, value: "0g", label: "Emissions" }
-    ];
-
-    const isMobile = windowWidth < 768;
-    const isTablet = windowWidth >= 768 && windowWidth < 1024;
-
     return (
-        <section ref={sectionRef} className={`relative w-full overflow-hidden bg-white ${isMobile ? 'min-h-[700px]' : isTablet ? 'min-h-[750px]' : 'h-screen'}`}>
-            {/* 🌄 BACKGROUND LAYER */}
-            <div className="absolute inset-0 z-0">
-                {/* THE MOUNTAIN IMAGE */}
-                <img
-                    src="/images/bg1.png"
-                    alt="Himalayan Background"
-                    className="w-full h-full object-cover object-bottom"
-                />
+        <section className="relative w-full min-h-[800px] bg-[#f4f8fa] font-sans pt-24 pb-20 overflow-hidden">
 
-                {/* TEXT READABILITY GRADIENT */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent z-10" />
-
-                {/* ROAD DEPTH GRADIENT */}
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent z-10" />
+            {/* 1. TOP CONTENT */}
+            <div className="max-w-[1500px] mx-auto pl-10 lg:pl-36 mb-16 text-left">
+                <div className="max-w-2xl">
+                    <h1 className="text-[#1a2b3c] text-4xl lg:text-[48px] font-bold leading-[1.1] tracking-tight mb-2">
+                        Now buying a car
+                    </h1>
+                    <h2 className="text-[#1a2b3c] text-3xl lg:text-[40px] font-light mb-10">
+                        on credit is truly profitable!
+                    </h2>
+                    <p className="text-[#7c8b9a] text-[15px] font-light leading-relaxed max-w-lg">
+                        FATCARS provides the opportunity to purchase a new car on credit under the most favorable conditions.
+                    </p>
+                </div>
             </div>
 
-            {/* 📦 CONTENT & VEHICLE */}
-            <div className="relative z-30 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-                <div className={`grid ${isMobile ? 'grid-cols-1' : 'lg:grid-cols-2'} gap-6 sm:gap-8 md:gap-12 w-full items-center ${isMobile ? 'py-10' : isTablet ? 'py-12' : ''}`}>
-
-                    {/* LEFT CONTENT */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1 }}
-                        className={`backdrop-blur-md bg-black/20 border border-white/10 rounded-2xl md:rounded-3xl ${isMobile ? 'p-5' : isTablet ? 'p-7' : 'p-8 lg:p-10'} max-w-lg mx-auto ${isMobile ? 'w-full' : ''}`}
-                    >
-                        <h2 className={`${isMobile ? 'text-2xl' : isTablet ? 'text-3xl' : 'text-5xl md:text-6xl'} font-light text-white leading-tight text-center sm:text-left`}>
-                            Drive the <br />
-                            <span className="font-bold bg-gradient-to-r from-[#C7A86D] to-[#E5B85C] bg-clip-text text-transparent">
-                                Himalayan Roads
-                            </span>
-                        </h2>
-
-                        <p className={`text-white/70 ${isMobile ? 'text-sm' : isTablet ? 'text-sm' : 'text-base'} mt-4 leading-relaxed max-w-sm text-center sm:text-left mx-auto sm:mx-0`}>
-                            Experience silence, power, and sustainability engineered for Nepal's terrain.
-                        </p>
-
-                        {/* Stats - Hidden on mobile, visible on tablet and desktop */}
-                        {!isMobile && (
-                            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mt-6 md:mt-8 lg:mt-10">
-                                {features.map((item, i) => (
-                                    <div key={i} className="flex items-center gap-2 sm:gap-3">
-                                        <div className={`${isTablet ? 'w-9 h-9' : 'w-8 h-8 md:w-10 md:h-10'} bg-white/10 rounded-xl flex items-center justify-center`}>
-                                            <item.icon className={`text-[#C7A86D] ${isTablet ? 'text-base' : 'text-base md:text-lg'}`} />
-                                        </div>
-                                        <div>
-                                            <div className={`text-white font-bold ${isTablet ? 'text-sm' : 'text-xs md:text-sm'}`}>{item.value}</div>
-                                            <div className={`text-white/40 ${isTablet ? 'text-[9px]' : 'text-[8px] md:text-[10px]'} uppercase tracking-wider`}>{item.label}</div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-                        <button className={`mt-6 md:mt-8 lg:mt-10 ${isMobile ? 'px-5 py-2.5 text-[11px]' : isTablet ? 'px-7 py-3 text-xs' : 'px-10 py-4 text-xs'} bg-[#C7A86D] hover:bg-[#D4B982] transition-colors text-black rounded-full flex items-center gap-2 sm:gap-3 font-bold uppercase tracking-widest shadow-xl shadow-black/20 mx-auto sm:mx-0`}>
-                            Explore Network <FiArrowRight className={`${isMobile ? 'text-xs' : isTablet ? 'text-sm' : 'text-sm md:text-base'}`} />
-                        </button>
-                    </motion.div>
-
-                    {/* RIGHT SIDE - VEHICLE (Perfectly Responsive) */}
-                    <div className={`relative ${isMobile ? 'h-[180px]' : isTablet ? 'h-[380px]' : 'h-full flex items-end'} ${isMobile ? 'mt-4' : isTablet ? 'mt-6' : ''}`}>
-                        <motion.div
-                            initial={{ opacity: 0, x: 100 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1.2, ease: "easeOut" }}
-                            className={`
-                                ${isMobile ? 'relative w-full right-[-18vw] bottom-[-10vw] sm:right-[-18vw] sm:bottom-[-12vw]' : ''}
-                                ${isTablet ? 'relative w-full md:right-[-15vw] md:bottom-[10vw]' : ''}
-                                ${!isMobile && !isTablet ? 'lg:absolute lg:right-[-23vw] lg:bottom-[-23vh]' : ''}
-                                z-20 pointer-events-none
-                            `}
-                            style={{
-                                ...(!isMobile && !isTablet && {
-                                    width: '190%',
-                                    maxWidth: 'none'
-                                })
-                            }}
-                        >
-                            {/* ROAD SHADOW */}
-                            <div className={`
-                                absolute bg-black/60 rounded-[100%] opacity-90
-                                ${isMobile ? 'bottom-0 left-[5%] w-[90%] h-16 blur-[70px]' : ''}
-                                ${isTablet ? 'bottom-0 left-[8%] w-[84%] h-20 blur-[80px]' : ''}
-                                ${!isMobile && !isTablet ? 'bottom-10 left-[15%] w-[70%] h-20 blur-[80px]' : ''}
-                            `} />
-
-                            <img
-                                src="/images/eterron9-1.png"
-                                alt="Maxus eTerron 9"
-                                className={`
-                                    object-contain relative z-10 brightness-105 contrast-[1.02] drop-shadow-[0_45px_100px_rgba(0,0,0,0.5)]
-                                    ${isMobile ? 'w-[160%] max-w-none -ml-[30%] -mb-8' : ''}
-                                    ${isTablet ? 'w-[150%] max-w-none -ml-[25%] -mb-12' : ''}
-                                    ${!isMobile && !isTablet ? 'w-full h-auto' : ''}
-                                `}
-                            />
-                        </motion.div>
+            {/* 2. THE INFO GRID BOXES */}
+            <div className="max-w-[1500px] mx-auto pl-10 lg:pl-36 relative z-10 mb-[50px]">
+                <div className="w-full lg:w-[50%] flex flex-wrap lg:flex-nowrap gap-px bg-transparent shadow-2xl">
+                    <div className="flex-1 min-w-[200px] bg-white p-8 lg:p-10 flex flex-col justify-between h-[200px]">
+                        <span className="text-[#1a2b3c] text-[11px] uppercase tracking-wider font-semibold">Credit interest rate</span>
+                        <div className="flex items-end justify-start">
+                            <span className="text-[#d9e2e9] text-[84px] font-light leading-[0.8] tracking-tighter">8,9</span>
+                            <span className="text-[#d9e2e9] text-[40px] font-light ml-1 leading-none">%</span>
+                        </div>
+                    </div>
+                    <div className="flex-[0.8] min-w-[150px] bg-[#2c323a] p-8 lg:p-10 flex flex-col justify-between h-[200px]">
+                        <div className="flex items-start">
+                            <span className="text-white text-[72px] font-light leading-[0.7] opacity-60">0</span>
+                            <span className="text-white text-[14px] font-medium ml-1 mt-2 opacity-60 uppercase">USD</span>
+                        </div>
+                        <span className="text-white text-[13px] font-light leading-snug max-w-[120px]">Credit with zero down payment</span>
+                    </div>
+                    <div className="flex-1 min-w-[200px] bg-[#dbebf5] p-8 lg:p-10 flex flex-col justify-center gap-4 h-[200px]">
+                        <span className="text-[#1a2b3c] text-[64px] font-light leading-none">%</span>
+                        <span className="text-[#1a2b3c] text-[13px] font-light leading-snug max-w-[160px]">No hidden fees for car credit purchases</span>
                     </div>
                 </div>
             </div>
 
-            {/* Subtle floating particles for atmosphere */}
-            <div className="absolute inset-0 pointer-events-none z-10">
-                {[...Array(isMobile ? 10 : isTablet ? 15 : 20)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        initial={{ x: Math.random() * 100 + "%", y: "110%" }}
-                        animate={{ y: "-10%" }}
-                        transition={{ duration: Math.random() * 10 + 10, repeat: Infinity, ease: "linear" }}
-                        className="absolute w-0.5 h-0.5 bg-white/10 rounded-full"
+            <div className="max-w-[1500px] mx-auto px-10 lg:px-24 relative">
+                <div className="absolute -top-[550px] right-20 w-[45vw] max-w-[480px] z-50 pointer-events-none">
+                    <img
+                        src="/images/cartop.png"
+                        alt="Green SUV Top View"
+                        className="w-full h-auto drop-shadow-[28px_18px_38px_rgba(0,0,0,0.7)]"
                     />
-                ))}
+                </div>
+            </div>
+            {/* 4. THE APPLICATION BOX */}
+            <div className="max-w-[1500px] mx-auto pl-10 lg:pl-36 pr-10 lg:pr-24 relative z-40 mt-32">
+                <div className="w-full grid grid-cols-1 lg:grid-cols-11  rounded-sm overflow-hidden">
+
+                    {/* COL 1: Partners (Green) */}
+                    <div className="lg:col-span-2 bg-gradient-to-b from-[#93db53] to-[#70b533] p-4 flex flex-col justify-between relative z-10">
+                        <div className="grid grid-cols-2 gap-y-8 gap-x-4">
+                            <BankLogo name="Sberbank" />
+                            <BankLogo name="Gazprombank" />
+                            <BankLogo name="Rosselkhozbank" />
+                            <BankLogo name="VT824" />
+                            <BankLogo name="Alfa-Bank" />
+                            <BankLogo name="URALSIB" />
+                            <BankLogo name="Otkritie" />
+                            <BankLogo name="Absolute Bank" />
+                        </div>
+
+                        {/* Reduced padding-top and adjusted font sizes to shrink the container height */}
+                        <div className="">
+                            <p className="text-white text-[12px] font-light max-w-[140px] opacity-90 leading-tight text-left pt-12">
+                                Probability of credit approval in 30 minutes
+                            </p>
+                            <div className="flex items-end">
+                                {/* Reduced from 150px to 90px */}
+                                <span className="text-white text-9xl font-bold tracking-tighter -ml-1">99</span>
+                                {/* Reduced from 120px to 40px */}
+                                <span className="text-white text-9xl font-light ml-1">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="lg:col-span-5 bg-[#25242b] p-10 flex flex-col justify-center gap-8 relative z-40 overflow-hidden">
+
+                        {/* --- THE LARGE BACKGROUND SHAPES --- */}
+                        <div
+                            className="absolute inset-0 opacity-20 pointer-events-none select-none z-0"
+                            style={{
+                                backgroundImage: `url("data:image/svg+xml,%3Csvg width='800' height='800' viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2388d958' stroke-width='5.5' stroke-opacity='0.3'%3E%3C!-- Rounded hexagon shape --%3E%3Cpath d='M400 80 L520 160 L520 320 L400 400 L280 320 L280 160 Z' stroke='%2388d958' stroke-opacity='0.25' /%3E%3C!-- Large rounded rectangle with gradient effect --%3E%3Crect x='520' y='450' width='220' height='280' rx='50' stroke='%2388d958' stroke-opacity='0.2' /%3E%3C!-- Circle with dashed border --%3E%3Ccircle cx='180' cy='580' r='95' stroke='%2388d958' stroke-opacity='0.3' stroke-dasharray='6 6' /%3E%3C!-- Organic blob shape --%3E%3Cpath d='M620 120 C650 100, 680 130, 670 160 C660 190, 680 220, 660 240 C640 260, 610 250, 590 230 C570 210, 580 180, 590 150 C600 120, 600 130, 620 120Z' stroke='%2388d958' stroke-opacity='0.2' fill='none' /%3E%3C!-- Modern abstract shape --%3E%3Crect x='50' y='280' width='180' height='180' rx='30' transform='rotate(25 140 370)' stroke='%2388d958' stroke-opacity='0.25' /%3E%3C!-- Small decorative circles --%3E%3Ccircle cx='680' cy='80' r='25' stroke='%2388d958' stroke-opacity='0.35' /%3E%3Ccircle cx='70' cy='120' r='18' stroke='%2388d958' stroke-opacity='0.3' /%3E%3Ccircle cx='750' cy='650' r='32' stroke='%2388d958' stroke-opacity='0.25' /%3E%3C!-- Soft wave line --%3E%3Cpath d='M50 550 Q150 520, 250 540 T450 530 T650 540' stroke='%2388d958' stroke-opacity='0.2' fill='none' stroke-width='1.8' /%3E%3C/g%3E%3C/svg%3E")`,
+                                backgroundSize: '1000px 1000px',
+                                backgroundPosition: '-150px -150px',
+                                backgroundRepeat: 'no-repeat'
+                            }}
+                        />
+
+                        {/* --- FORM CONTENT (Wrapped in relative z-10 to stay above shapes) --- */}
+                        <div className="relative z-10 flex flex-col gap-8">
+                            <div className="flex items-center gap-4 text-white/90">
+                                <div className="w-10 h-[1px] bg-[#b2f55d]" />
+                                <span className="text-[15px] font-light tracking-wide">
+                                    Fill out the form and get a decision in 30 minutes
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-3">
+                                <SelectField label="Select Make" />
+                                <SelectField label="Employment type" />
+                                <SelectField label="Select Model" />
+                                <input type="text" placeholder="First payment" className="h-[50px] bg-[#393f4a] border border-white/5 rounded-full px-6 text-white/50 text-[13px] outline-none focus:ring-1 focus:ring-[#b2f55d]/30" />
+                                <SelectField label="Configuration" />
+                                <input type="text" placeholder="City of registration" className="h-[50px] bg-[#393f4a] border border-white/5 rounded-full px-6 text-white/50 text-[13px] outline-none focus:ring-1 focus:ring-[#b2f55d]/30" />
+
+                                <div className="relative">
+                                    <input type="text" placeholder="+7 (___) ___ - __ - __" className="w-full h-[50px] bg-[#393f4a] border border-white/5 rounded-full px-10 text-white text-[13px] outline-none" />
+                                    <FiPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
+                                </div>
+
+                                {/* Updated Button to match image_877486.png */}
+                                <button className="h-[50px]  bg-gradient-to-b from-[#90d950] to-[#75b53a] hover:bg-[#a1e04c] text-white font-extrabold uppercase tracking-[0.2em] text-[10px] rounded-full flex items-center justify-center gap-3 transition-all shadow-[0_10px_20px_rgba(178,245,93,0.2)]">
+                                    SUBMIT APPLICATION
+                                    <FiChevronRight className="text-lg" />
+                                </button>
+                            </div>
+
+                            <div className="flex items-start gap-3">
+                                <input type="checkbox" id="consent" className="mt-1 accent-[#b2f55d]" defaultChecked />
+                                <label htmlFor="consent" className="text-white/30 text-[10px] font-light leading-relaxed cursor-pointer">
+                                    I agree to the processing of my personal data...
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* COL 3: Empty Gray Space */}
+                    <div className="hidden lg:block lg:col-span-4 bg-[#25242b]" />
+
+                </div>
             </div>
         </section>
     );

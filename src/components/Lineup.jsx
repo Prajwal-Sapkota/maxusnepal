@@ -1,351 +1,234 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { FiArrowRight, FiZap, FiBattery, FiTrendingUp, FiStar, FiNavigation, FiChevronLeft, FiChevronRight, FiMapPin, FiShield, FiPercent } from "react-icons/fi";
-
-const vehicles = [
-  {
-    name: "eTerron 9",
-    type: "Electric Pickup",
-    image: "/images/eterron.jpg",
-    range: "560 km",
-    power: "325 kW",
-    acceleration: "5.5s",
-    torque: "700 Nm",
-    description: "Unmatched power meets luxury. The ultimate electric pickup that redefines capability.",
-    badge: "Flagship",
-    color: "#C7A86D"
-  },
-  {
-    name: "MIFA 9",
-    type: "Luxury MPV",
-    image: "/images/mifa9.jpg",
-    range: "520 km",
-    power: "180 kW",
-    acceleration: "8.2s",
-    torque: "350 Nm",
-    description: "Executive luxury redefined. Your mobile boardroom with first-class comfort.",
-    badge: "Executive",
-    color: "#C7A86D"
-  },
-  {
-    name: "MIFA 7",
-    type: "Family EV",
-    image: "/images/mifa7.jpg",
-    range: "635 km",
-    power: "180 kW",
-    acceleration: "7.8s",
-    torque: "350 Nm",
-    description: "Maximum range. Maximum comfort. The perfect companion for family adventures.",
-    badge: "Long Range",
-    color: "#C7A86D"
-  }
-];
+import React, { useState } from 'react';
+import { FiChevronRight, FiChevronLeft, FiUser, FiPhone } from "react-icons/fi";
 
 const Lineup = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [activeTab, setActiveTab] = useState('new');
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const next = () => {
-    setActiveIndex((prev) => (prev + 1) % vehicles.length);
+  // Exact data from image_7e681d.jpg
+  const cars = [
+    {
+      id: 1,
+      name: "Volkswagen Jetta GLI",
+      year: "2017",
+      price: "1 622 000 ₽",
+      oldPrice: "2 108 000 ₽",
+      discount: "-30%",
+      specs: [
+        { label: "engine volume", value: "2.0 l tfsi" },
+        { label: "power", value: "221 hp" },
+        { label: "transmission", value: "6 speed DSG" },
+        { label: "fuel type", value: "Gasoline" },
+      ],
+      image: "/images/vehicle1.png"
+    },
+    {
+      id: 2,
+      name: "Volkswagen Jetta GLI",
+      year: "2017",
+      price: "1 622 000 ₽",
+      tag: "from 7000 r/mo",
+      specs: [
+        { label: "engine volume", value: "2.0 l tfsi" },
+        { label: "power", value: "221 hp" },
+        { label: "transmission", value: "6 speed DSG" },
+        { label: "fuel type", value: "Gasoline" },
+      ],
+      image: "/images/vehicle1.png"
+    }
+  ];
+
+  const totalSlides = 20;
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
   };
 
-  const prev = () => {
-    setActiveIndex((prev) => (prev - 1 + vehicles.length) % vehicles.length);
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
   };
-
-  // Auto-rotate
-  useEffect(() => {
-    const interval = setInterval(() => {
-      next();
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
-    <section className="relative bg-gradient-to-b from-[#2C2C2C] to-[#1E1E1E] py-20 px-4 md:px-6 lg:px-12 overflow-hidden min-h-screen">
-      <div
-        onMouseMove={(e) => setMouse({ x: e.clientX, y: e.clientY })}
-        className="absolute inset-0 pointer-events-none z-20"
-      >
-        <motion.div
-          animate={{
-            x: mouse.x - 200,
-            y: mouse.y - 200,
-          }}
-          transition={{ type: "spring", stiffness: 50, damping: 25 }}
-          className="w-[400px] h-[400px] bg-[#C7A86D]/10 rounded-full blur-3xl"
-        />
-      </div>
+    <section className="bg-[#f5feff] py-24 font-sans overflow-hidden">
+      <div className="max-w-[1500px] mx-auto px-10 lg:px-21">
 
-      {/* Background Motion Layer - Subtle */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            scale: [1, 1.05, 1],
-            opacity: [0.15, 0.25, 0.15],
-            x: [0, 30, 0],
-            y: [0, 20, 0]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-20 right-20 w-[500px] h-[500px] bg-[#C7A86D]/8 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.08, 1],
-            opacity: [0.1, 0.2, 0.1],
-            x: [0, -20, 0],
-            y: [0, -15, 0]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 2 }}
-          className="absolute bottom-20 left-20 w-[450px] h-[450px] bg-[#C7A86D]/8 rounded-full blur-3xl"
-        />
-      </div>
+        {/* --- HEADER TITLE --- */}
+        <h2 className="text-[42px] font-light text-[#1a1a1c] text-center mb-16 tracking-tight">
+          Actual cars in stock with Title
+        </h2>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+        {/* --- FILTER & PAGINATION BAR --- */}
+        <div className="flex flex-col md:flex-row items-center justify-between border-t border-gray-100 pt-10 mb-2">
+          {/* Left: Found Count */}
+          <div className="text-gray-300 text-[13px] font-medium">
+            Total cars found: <span className="text-[#1a1a1c] font-bold text-2xl ml-2 tracking-tighter">115</span>
+          </div>
 
-        {/* Header */}
-        <div className="mb-12 md:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-center"
-          >
-            <div className="inline-flex items-center gap-3 mb-4">
-              <div className="w-8 h-px bg-[#C7A86D]" />
-              <span className="text-[#C7A86D] text-xs tracking-[0.3em] uppercase font-bold">The Collection</span>
-              <div className="w-8 h-px bg-[#C7A86D]" />
+          {/* Center: Tabs Switcher */}
+          <div className="flex bg-white rounded-full p-1 border border-gray-100 shadow-sm">
+            <button
+              onClick={() => setActiveTab('used')}
+              className={`px-9 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] rounded-full transition-all duration-300 ${activeTab === 'used' ? 'bg-[#6bcf50] text-white shadow-lg shadow-green-200' : 'text-gray-300 hover:text-gray-400'}`}
+            >
+              Used cars
+            </button>
+            <button
+              onClick={() => setActiveTab('new')}
+              className={`px-9 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] rounded-full transition-all duration-300 ${activeTab === 'new' ? 'bg-[#6bcf50] text-white shadow-lg shadow-green-200' : 'text-gray-300 hover:text-gray-400'}`}
+            >
+              New cars
+            </button>
+          </div>
+
+          {/* Right: Dynamic Pagination Counter */}
+          <div className="flex items-center gap-4">
+            <span className="text-[28px] font-black text-[#1a1a1c] tracking-tighter leading-none">
+              {String(currentIndex + 1).padStart(2, '0')}
+            </span>
+            <div className="flex gap-2 text-[11px] font-black tracking-[0.2em] text-gray-200 uppercase">
+              <span>02</span> <span>03</span> <span>04</span> <span>...</span> <span>{totalSlides}</span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white">
-              Discover Your{" "}
-              <span className="font-bold bg-gradient-to-r from-[#C7A86D] to-[#9B7B4C] bg-clip-text text-transparent">
-                Electric Companion
-              </span>
-            </h2>
-            <p className="text-slate-400 mt-3 md:mt-4 max-w-xl mx-auto text-xs md:text-sm px-4">
-              Experience the future of mobility with our revolutionary electric fleet
-            </p>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Main Carousel - Cinematic */}
-        <div className="relative max-w-7xl mx-auto">
+        {/* --- SLIDER CONTAINER --- */}
+        <div className="relative mt-10">
 
-          {/* Main Image Container */}
-          <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-[450px] md:h-[600px] lg:h-[700px]">
-            {vehicles.map((vehicle, idx) => (
-              <motion.div
-                key={idx}
-                className="absolute inset-0"
-                initial={false}
-                animate={{
-                  opacity: activeIndex === idx ? 1 : 0,
-                  scale: activeIndex === idx ? 1 : 1.05,
-                  filter: activeIndex === idx ? "blur(0px)" : "blur(10px)"
-                }}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {/* 🎯 PARALLAX IMAGE */}
-                <motion.img
-                  src={vehicle.image}
-                  alt={vehicle.name}
-                  className="w-full h-full object-cover object-center"
-                  animate={{
-                    scale: activeIndex === idx ? 1 : 1.1,
-                  }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                />
-
-                {/* Gradient Overlay - Balanced */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-
-                {/* ✨ FLOATING CONTENT - Desktop Layout */}
-                <motion.div
-                  initial={{ y: 100, opacity: 0 }}
-                  animate={{
-                    y: activeIndex === idx ? 0 : 50,
-                    opacity: activeIndex === idx ? 1 : 0
-                  }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute bottom-0 left-0 right-0 p-4 md:p-8 lg:p-12 xl:p-16"
-                >
-                  {/* DESKTOP LAYOUT (md and above) */}
-                  <div className="hidden md:flex flex-row justify-between items-end gap-6">
-                    {/* LEFT SIDE - Stats */}
-                    <div className="max-w-lg">
-                      <div className="flex flex-wrap gap-3 md:gap-4">
-                        {[
-                          { icon: FiBattery, value: vehicle.range, label: "Range" },
-                          { icon: FiZap, value: vehicle.power, label: "Power" },
-                          { icon: FiTrendingUp, value: vehicle.acceleration, label: "0-100" },
-                          { icon: FiNavigation, value: vehicle.torque, label: "Torque" }
-                        ].map((stat, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ y: 40, opacity: 0 }}
-                            animate={{
-                              y: activeIndex === idx ? 0 : 30,
-                              opacity: activeIndex === idx ? 1 : 0
-                            }}
-                            transition={{ delay: 0.6 + i * 0.08 }}
-                            className="flex items-center gap-2 md:gap-3 group"
-                          >
-                            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-[#C7A86D]/20 transition-all">
-                              <stat.icon className="text-[#C7A86D] text-sm md:text-lg" />
-                            </div>
-                            <div>
-                              <p className="text-white font-bold text-xs md:text-sm">{stat.value}</p>
-                              <p className="text-white/40 text-[7px] md:text-[9px] uppercase tracking-wider">{stat.label}</p>
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* RIGHT SIDE - Name and Button */}
-                    <div className="text-right">
-                      <motion.h3
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{
-                          opacity: activeIndex === idx ? 1 : 0,
-                          y: activeIndex === idx ? 0 : 30
-                        }}
-                        transition={{ delay: 0.4 }}
-                        className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 leading-tight"
-                      >
-                        {vehicle.name}
-                      </motion.h3>
-
-                      <motion.button
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{
-                          opacity: activeIndex === idx ? 1 : 0,
-                          x: activeIndex === idx ? 0 : 20
-                        }}
-                        transition={{ delay: 0.8 }}
-                        whileHover={{ scale: 1.05, x: 8 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="px-8 py-3 bg-[#C7A86D] text-black rounded-full flex items-center gap-2 shadow-xl hover:shadow-2xl transition-all duration-300 group"
-                      >
-                        <span className="font-bold uppercase tracking-wider text-sm">Explore {vehicle.name}</span>
-                        <motion.div
-                          animate={{ x: [0, 4, 0] }}
-                          transition={{ duration: 1, repeat: Infinity }}
-                        >
-                          <FiArrowRight className="text-sm" />
-                        </motion.div>
-                      </motion.button>
-                    </div>
-                  </div>
-
-                  {/* MOBILE LAYOUT (below md) - Title on top, Stats and Button below */}
-                  <div className="flex flex-col md:hidden gap-4">
-                    {/* Title on Top */}
-                    <motion.h3
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{
-                        opacity: activeIndex === idx ? 1 : 0,
-                        y: activeIndex === idx ? 0 : 30
-                      }}
-                      transition={{ delay: 0.4 }}
-                      className="text-3xl font-bold text-white text-center"
-                    >
-                      {vehicle.name}
-                    </motion.h3>
-
-                    {/* Button */}
-                    <motion.button
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{
-                        opacity: activeIndex === idx ? 1 : 0,
-                        x: activeIndex === idx ? 0 : 20
-                      }}
-                      transition={{ delay: 0.8 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="px-6 py-2.5 bg-[#C7A86D] text-black rounded-full flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl transition-all duration-300 group mx-auto"
-                    >
-                      <span className="font-bold uppercase tracking-wider text-xs">Explore</span>
-                      <motion.div
-                        animate={{ x: [0, 4, 0] }}
-                        transition={{ duration: 1, repeat: Infinity }}
-                      >
-                        <FiArrowRight className="text-xs" />
-                      </motion.div>
-                    </motion.button>
-
-                    {/* Stats Below Button */}
-                    <div className="flex flex-wrap justify-center gap-3 mt-2">
-                      {[
-                        { icon: FiBattery, value: vehicle.range, label: "Range" },
-                        { icon: FiZap, value: vehicle.power, label: "Power" },
-                        { icon: FiTrendingUp, value: vehicle.acceleration, label: "0-100" },
-                        { icon: FiNavigation, value: vehicle.torque, label: "Torque" }
-                      ].map((stat, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ y: 40, opacity: 0 }}
-                          animate={{
-                            y: activeIndex === idx ? 0 : 30,
-                            opacity: activeIndex === idx ? 1 : 0
-                          }}
-                          transition={{ delay: 0.6 + i * 0.08 }}
-                          className="flex items-center gap-2 group"
-                        >
-                          <div className="w-7 h-7 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-[#C7A86D]/20 transition-all">
-                            <stat.icon className="text-[#C7A86D] text-xs" />
-                          </div>
-                          <div>
-                            <p className="text-white font-bold text-[10px]">{stat.value}</p>
-                            <p className="text-white/40 text-[6px] uppercase tracking-wider">{stat.label}</p>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Premium Navigation Arrows */}
+          {/* Floating Navigation Buttons */}
           <button
-            onClick={prev}
-            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-[#C7A86D] hover:border-[#C7A86D] transition-all duration-300 z-20 group"
+            onClick={handlePrev}
+            className="absolute -left-6 top-1/2 -translate-y-1/2 z-0 w-16 h-16 bg-white rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex items-center justify-center text-gray-300 hover:text-[#6bcf50] transition-all border border-gray-50 active:scale-95 opacity-80 hover:opacity-100"
+            style={{ transform: 'translateY(-50%) translateX(-30%)' }}
           >
-            <FiChevronLeft size={20} className="md:size-24 group-hover:scale-110 transition-transform" />
+            <FiChevronLeft className="text-5xl pr-3" />
           </button>
 
           <button
-            onClick={next}
-            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white hover:bg-[#C7A86D] hover:border-[#C7A86D] transition-all duration-300 z-20 group"
+            onClick={handleNext}
+            className="absolute -right-6 top-1/2 -translate-y-1/2 z-0 w-16 h-16 bg-white rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.08)] flex items-center justify-center text-gray-300 hover:text-[#6bcf50] transition-all border border-gray-50 active:scale-95 opacity-80 hover:opacity-100"
+            style={{ transform: 'translateY(-50%) translateX(30%)' }}
           >
-            <FiChevronRight size={20} className="md:size-24 group-hover:scale-110 transition-transform" />
+            <FiChevronRight className="text-5xl pl-3" />
           </button>
 
-          {/* Glass Thumbnail Navigation */}
-          <div className="flex justify-center gap-2 md:gap-3 mt-6 md:mt-8">
-            {vehicles.map((vehicle, idx) => (
-              <motion.button
-                key={idx}
-                onClick={() => setActiveIndex(idx)}
-                className={`relative rounded-lg md:rounded-xl overflow-hidden transition-all duration-300 ${activeIndex === idx
-                    ? 'ring-2 ring-[#C7A86D] scale-105'
-                    : 'opacity-60 hover:opacity-90'
-                  }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="w-16 h-11 md:w-20 md:h-14 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg md:rounded-xl overflow-hidden">
-                  <img
-                    src={vehicle.image}
-                    alt={vehicle.name}
-                    className="w-full h-full object-cover"
-                  />
+          {/* The Grid Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 bg-white border-l border-t border-gray-100 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] relative z-30">
+            {cars.map((car, idx) => (
+              <div key={idx} className="p-10  border-b border-gray-100 flex flex-col relative group cursor-pointer overflow-hidden">
+                <div className="flex justify-between items-start">
+                  <span className="text-[9px] uppercase font-black text-gray-200 tracking-[0.2em]">New Car</span>
+                  <div className="text-right">
+                    <div className="text-[22px] font-black text-[#1a1a1c] tracking-tight">{car.price}</div>
+                    {car.oldPrice && <div className="text-[11px] text-gray-200 line-through font-bold mt-1">{car.oldPrice}</div>}
+                    {car.tag && <div className="inline-block text-[9px] text-[#6bcf50] font-black bg-[#6bcf50]/10 px-2.5 py-1 rounded-sm mt-1 uppercase tracking-tighter">{car.tag}</div>}
+                  </div>
                 </div>
-              </motion.button>
+
+                {car.discount && (
+                  <div className="absolute top-24 right-10 w-14 h-14 bg-[#ff7b7b] rounded-full flex items-center justify-center text-white font-black text-[13px] shadow-lg shadow-red-100 z-10">
+                    {car.discount}
+                  </div>
+                )}
+
+                <div className="my-6 transform group-hover:translate-y-[-8px] transition-transform duration-500 ease-out">
+                  <img src={car.image} className="w-full h-44 object-contain" alt={car.name} />
+                </div>
+
+                <div className="mb-10">
+                  <h3 className="text-[18px] font-bold text-[#1a1a1c] leading-tight">
+                    {car.name} <span className="text-[#6bcf50] ml-1">{car.year}</span>
+                  </h3>
+                </div>
+
+                {/* Specs Grid: Exact 2x2 layout */}
+                <div className="grid grid-cols-2 border-t border-gray-100 pt-8 gap-y-8">
+                  {car.specs.map((spec, sIdx) => (
+                    <div key={sIdx} className={sIdx % 2 === 0 ? "border-r border-gray-100 pr-4" : "pl-8"}>
+                      <p className="text-[9px] uppercase text-gray-200 font-black mb-1.5 tracking-widest leading-none">{spec.label}</p>
+                      <p className="text-[15px] font-black text-[#1a1a1c] leading-none tracking-tight">{spec.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             ))}
+
+            {/* --- THIRD CARD: FORM + SPECS (MATCHES IMAGE) --- */}
+            <div className="flex flex-col border-r border-b border-gray-100 h-full">
+
+              {/* TOP PART: DARK FORM SECTION */}
+              <div className="relative overflow-hidden bg-[#323238] px-6 flex flex-col justify-center items-center flex-grow min-h-[290px]">
+                {/* Blurred Car Background */}
+                <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                  <img
+                    src="/images/vehicle1.png"
+                    alt="Background car"
+                    className="w-full h-full object-contain opacity-20 blur-sm scale-125"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#323238]/40 via-transparent to-[#323238]"></div>
+                </div>
+
+                <h4 className="text-white text-center font-bold text-[16px] mb-4 leading-tight z-10 relative">
+                  Learn more about the car
+                </h4>
+
+                <div className="w-full space-y-3 mb-6 z-10 relative">
+                  <div className="relative">
+                    <FiUser className="absolute left-18 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      className="w-3xs bg-white rounded-full py-3.5 pl-12 pr-6 text-gray-800 text-xs outline-none shadow-inner"
+                    />
+                  </div>
+                  <div className="relative">
+                    <FiPhone className="absolute left-18 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="+7 (___) ___-__-__"
+                      className="w-3xs bg-white rounded-full py-3.5 pl-12 pr-6 text-gray-800 text-xs outline-none shadow-inner"
+                    />
+                  </div>
+                </div>
+
+                <button className="relative w-3xs py-4 bg-gradient-to-b from-[#94d95b] to-[#79b842] hover:from-[#9ee560] hover:to-[#86c74f] text-white rounded-full text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 z-10 shadow-[0_8px_20px_-5px_rgba(121,184,66,0.4)] hover:shadow-[0_12px_25px_-6px_rgba(121,184,66,0.5)] active:scale-[0.98] active:shadow-[0_4px_12px_-3px_rgba(121,184,66,0.3)]">
+                  Get Consultation
+                </button>
+              </div>
+
+              {/* BOTTOM PART: WHITE SPEC SECTION */}
+              <div className="bg-white p-10">
+                <div className="mb-8">
+                  <h3 className="text-[18px] font-bold text-[#1a1a1c] leading-tight">
+                    Volkswagen Jetta GLI <span className="text-[#6bcf50] ml-1">2017</span>
+                  </h3>
+                </div>
+
+                {/* Exact 2x2 grid to match other cards */}
+                <div className="grid grid-cols-2 border-t border-gray-100 pt-8 gap-y-8">
+                  <div className="border-r border-gray-100 pr-4">
+                    <p className="text-[9px] uppercase text-gray-300 font-black mb-1.5 tracking-widest">engine volume</p>
+                    <p className="text-[15px] font-black text-[#1a1a1c]">2.0 l tfsi</p>
+                  </div>
+                  <div className="pl-8">
+                    <p className="text-[9px] uppercase text-gray-300 font-black mb-1.5 tracking-widest">power</p>
+                    <p className="text-[15px] font-black text-[#1a1a1c]">221 hp</p>
+                  </div>
+                  <div className="border-r border-gray-100 pr-4">
+                    <p className="text-[9px] uppercase text-gray-300 font-black mb-1.5 tracking-widest">transmission</p>
+                    <p className="text-[15px] font-black text-[#1a1a1c]">6 speed DSG</p>
+                  </div>
+                  <div className="pl-8">
+                    <p className="text-[9px] uppercase text-gray-300 font-black mb-1.5 tracking-widest">fuel type</p>
+                    <p className="text-[15px] font-black text-[#1a1a1c]">Gasoline</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
+
+
       </div>
     </section>
   );
