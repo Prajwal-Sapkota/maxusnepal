@@ -1,0 +1,482 @@
+{
+  "vehicles": [
+    {
+      "id": "eterron-9",
+      "slug": "eterron9",
+      "name": "eTerron 9",
+      "fullName": "MAXUS eTerron 9",
+      "type": "Electric 4WD Pickup",
+      "price": "Rs. 1.10 Crore",
+      "tagline": "DOMINATE EVERY TERRAIN",
+      "shortDesc": "Nepal's first luxury electric 4WD pickup with adjustable air suspension and dual-motor performance.",
+      "description": "The eTerron 9 redefines what an electric pickup can do. With its powerful dual-motor 4WD system, you get instant torque and unparalleled control on any terrain. The advanced All-Terrain System (ATS) offers 400+ customizable mode combinations, letting you tailor the driving experience to your exact needs. Whether you're navigating city streets or exploring mountain trails, the eTerron 9 delivers uncompromising capability with zero emissions.",
+      "image": "/images/eterron9-1.png",
+      "interiorImage": "/images/eterronint.jpg",
+      "detailImage": "/images/eterronluxury.jpg",
+      "videoUrl": "/videos/eterron9-hero.mp4",
+      "accentColor": "#C7A86D",
+      "specs": [
+        { "label": "Torque", "value": "700", "unit": "NM", "desc": "Instant torque delivery" },
+        { "label": "0-100 km/h", "value": "5.8", "unit": "SEC", "desc": "Acceleration" },
+        { "label": "Battery", "value": "102.2", "unit": "KWH", "desc": "High-density battery pack" },
+        { "label": "Range (NEDC)", "value": "560", "unit": "KM", "desc": "Long-range high-voltage battery" },
+        { "label": "Power", "value": "325", "unit": "KW", "desc": "Dual motor output" },
+        { "label": "Ground Clearance", "value": "210", "unit": "MM", "desc": "Adjustable air suspension" }
+      ],
+      "features": [
+        "Air independent suspension & Multi-link Rear Axle",
+        "Luxurious interior with soft leather",
+        "Power adjustment for front row seats",
+        "Easy-access Tailgate",
+        "Multifunctional 'Frunk' (150L storage)",
+        "All-Terrain System (ATS) with 400+ combinations",
+        "Ventilated front seats with heating",
+        "12.3-inch digital instrument cluster",
+        "15.6-inch floating touchscreen",
+        "Premium sound system (8 speakers)",
+        "Wireless smartphone charging",
+        "Panoramic sunroof",
+        "LED Matrix headlights",
+        "360° camera system"
+      ],
+      "technology": [
+        { 
+          "title": "Dual Motor 4WD", 
+          "desc": "Powerful dual-motor system delivers instant torque and exceptional all-terrain capability. Independent front and rear motors provide precise torque vectoring for superior handling." 
+        },
+        { 
+          "title": "All-Terrain System (ATS)", 
+          "desc": "400+ customizable mode combinations to conquer any terrain with confidence. Includes Snow, Mud, Sand, Rock, and Eco modes with adjustable suspension height." 
+        },
+        { 
+          "title": "Smart Regeneration", 
+          "desc": "Adjustable regenerative braking with paddle shifters for maximum efficiency. Choose from 3 levels of regeneration to suit your driving style and road conditions." 
+        },
+        { 
+          "title": "V2L Technology", 
+          "desc": "Vehicle-to-load capability allows you to power external devices and appliances. Perfect for camping trips or worksite power needs." 
+        },
+        { 
+          "title": "Intelligent Thermal Management", 
+          "desc": "Advanced battery thermal management system ensures optimal performance in all weather conditions, with pre-conditioning for maximum efficiency." 
+        },
+        { 
+          "title": "OTA Updates", 
+          "desc": "Over-the-air software updates keep your vehicle's systems current with the latest features and improvements." 
+        }
+      ],
+      "highlights": [
+        { "icon": "FiZap", "label": "560 KM", "desc": "Long-range high-voltage battery" },
+        { "icon": "FiNavigation", "label": "5.8 SEC", "desc": "0 to 100 km/h acceleration" },
+        { "icon": "FiShield", "label": "5-STAR", "desc": "Euro NCAP Safety Rating" }
+      ],
+      "colors": ["#FFFFFF", "#1A1A1A", "#4A4A4A", "#C7A86D"],
+      "colorNames": {
+        "#FFFFFF": "Arctic White",
+        "#1A1A1A": "Phantom Black",
+        "#4A4A4A": "Graphite Grey",
+        "#C7A86D": "Desert Bronze"
+      },
+      "colorImages": {
+        "#FFFFFF": "/images/eterronwhite.png",
+        "#1A1A1A": "/images/eterronblack.png",
+        "#4A4A4A": "/images/eterrongrey.png",
+        "#C7A86D": "/images/eterronbronze.png"
+      },
+      "gallery": [
+        {
+          "src": "/images/eterron9-1.png",
+          "category": "Exterior",
+          "title": "Front Profile",
+          "description": "Aggressive front fascia with LED matrix headlights"
+        },
+        {
+          "src": "/images/eterronluxury.jpg",
+          "category": "Exterior",
+          "title": "Side View",
+          "description": "Dynamic silhouette with muscular stance"
+        },
+        {
+          "src": "/images/eterronint.jpg",
+          "category": "Interior",
+          "title": "Cockpit",
+          "description": "Driver-focused cockpit with premium materials"
+        },
+        {
+          "src": "/images/eterronwhite.png",
+          "category": "Colors",
+          "title": "Arctic White",
+          "description": "Crisp and clean pearl white finish"
+        },
+        {
+          "src": "/images/eterronblack.png",
+          "category": "Colors",
+          "title": "Phantom Black",
+          "description": "Deep and mysterious black metallic"
+        },
+        {
+          "src": "/images/eterrongrey.png",
+          "category": "Colors",
+          "title": "Graphite Grey",
+          "description": "Sophisticated urban grey"
+        },
+        {
+          "src": "/images/eterronbronze.png",
+          "category": "Colors",
+          "title": "Desert Bronze",
+          "description": "Earthy bronze for adventurous souls"
+        },
+        {
+          "src": "/images/eterron9-detail-1.jpg",
+          "category": "Details",
+          "title": "Wheel Design",
+          "description": "20-inch alloy wheels with aerodynamic design"
+        },
+        {
+          "src": "/images/eterron9-detail-2.jpg",
+          "category": "Details",
+          "title": "Lighting Signature",
+          "description": "Full LED lighting with daytime running signature"
+        },
+        {
+          "src": "/images/eterron9-cargo.jpg",
+          "category": "Utility",
+          "title": "Cargo Space",
+          "description": "Versatile bed with multiple tie-down points"
+        }
+      ]
+    },
+    {
+      "id": "mifa-9",
+      "slug": "mifa9",
+      "name": "MIFA 9",
+      "fullName": "MAXUS MIFA 9",
+      "type": "Flagship Luxury MPV",
+      "price": "Rs. 1.25 Crore",
+      "tagline": "FIRST-CLASS INTELLIGENCE",
+      "shortDesc": "The world's first full-size pure electric MPV, featuring aviation-grade seating and 5-star safety.",
+      "description": "The MIFA 9 redefines executive travel with its aviation-grade seating and ultra-quiet cabin. Experience first-class comfort with massage functions, premium sound insulation, and a panoramic glass roof that brings the outside in. Designed for those who demand the best in luxury and sustainability, the MIFA 9 sets a new standard for electric mobility.",
+      "image": "/images/mifa91.png",
+      "interiorImage": "/images/mifa9interior.jpg",
+      "detailImage": "/images/mifa9detail.jpg",
+      "videoUrl": "/videos/mifa9-hero.mp4",
+      "accentColor": "#C7A86D",
+      "specs": [
+        { "label": "Power", "value": "180", "unit": "KW", "desc": "Electric motor output" },
+        { "label": "Torque", "value": "350", "unit": "NM", "desc": "Instant torque delivery" },
+        { "label": "Seating", "value": "7-8", "unit": "SEATS", "desc": "Versatile configuration" },
+        { "label": "Safety", "value": "5", "unit": "STAR", "desc": "Euro NCAP Rating" },
+        { "label": "Charging (DC)", "value": "30", "unit": "MIN", "desc": "20-80% fast charging" },
+        { "label": "Battery", "value": "90", "unit": "KWH", "desc": "High-density battery" }
+      ],
+      "features": [
+        "Aviation-grade executive seats with massage function",
+        "Panoramic glass roof with power sunshade",
+        "Premium sound system with active noise cancellation",
+        "Power sliding doors with foot sensor activation",
+        "Tri-zone automatic climate control",
+        "12.8-inch floating touchscreen display",
+        "Digital rearview mirror with camera",
+        "64-color ambient lighting",
+        "Hands-free power tailgate",
+        "Second-row entertainment screens",
+        "Heated and ventilated front seats",
+        "Power-adjustable second-row captain chairs",
+        "Luxury Nappa leather upholstery",
+        "Wireless smartphone charger"
+      ],
+      "technology": [
+        { 
+          "title": "Executive Lounge", 
+          "desc": "First-class seating with heating, ventilation, and massage functions for ultimate comfort. Second-row seats feature power adjustment, memory settings, and a dedicated entertainment system." 
+        },
+        { 
+          "title": "Smart Cabin", 
+          "desc": "Voice-controlled ambient lighting and entertainment system for personalized experiences. AI assistant responds to natural commands for climate, navigation, and media control." 
+        },
+        { 
+          "title": "Ultra-Silent Drive", 
+          "desc": "Advanced sound insulation technology with acoustic glass and active noise cancellation for whisper-quiet cabin serenity. Enjoy conversation-quality interior at highway speeds." 
+        },
+        { 
+          "title": "Intelligent Safety Suite", 
+          "desc": "Comprehensive ADAS package includes adaptive cruise control, lane keeping assist, automatic emergency braking, and blind spot monitoring for maximum safety." 
+        },
+        { 
+          "title": "Smart Parking", 
+          "desc": "Fully automated parking system with 360° camera and ultrasonic sensors handles parallel and perpendicular parking with a single touch." 
+        },
+        { 
+          "title": "Connected Car", 
+          "desc": "Remote vehicle control via smartphone app. Check battery status, pre-condition cabin temperature, and locate your vehicle from anywhere." 
+        }
+      ],
+      "highlights": [
+        { "icon": "FiUsers", "label": "7-8 SEATS", "desc": "Versatile seating configuration" },
+        { "icon": "FiVolume", "label": "ULTRA-SILENT", "desc": "Premium noise cancellation" },
+        { "icon": "FiStar", "label": "5-STAR", "desc": "Euro NCAP Safety Rating" }
+      ],
+      "colors": ["#FFFFFF", "#1A1A1A", "#4A4A4A", "#C7A86D", "#2C4A6E"],
+      "colorNames": {
+        "#FFFFFF": "Pearl White",
+        "#1A1A1A": "Phantom Black",
+        "#4A4A4A": "Graphite Grey",
+        "#C7A86D": "Champagne Gold",
+        "#2C4A6E": "Deep Blue"
+        
+      },
+      "colorImages": {
+        "#FFFFFF": "/images/mifa9white.png",
+        "#1A1A1A": "/images/mifa9black.png",
+        "#4A4A4A": "/images/mifa9grey.png",
+        "#C7A86D": "/images/mifa9gold.png",
+        "#2C4A6E": "/images/mifa9blue.png"
+      },
+      "gallery": [
+        {
+          "src": "/images/mifa9hero.webp",
+          "category": "Exterior",
+          "title": "Front View",
+          "description": "Commanding front grille with signature lighting"
+        },
+        {
+          "src": "/images/mifa9detail.jpg",
+          "category": "Exterior",
+          "title": "Side Profile",
+          "description": "Elegant long wheelbase design"
+        },
+        {
+          "src": "/images/mifa9interior.jpg",
+          "category": "Interior",
+          "title": "First Class Cabin",
+          "description": "Aviation-grade executive seating"
+        },
+        {
+          "src": "/images/mifa9green.avif",
+          "category": "Colors",
+          "title": "Pearl White",
+          "description": "Timeless elegance"
+        },
+        {
+          "src": "/images/mifa9black.png",
+          "category": "Colors",
+          "title": "Phantom Black",
+          "description": "Bold and authoritative"
+        },
+        {
+          "src": "/images/mifa9grey.png",
+          "category": "Colors",
+          "title": "Graphite Grey",
+          "description": "Modern sophistication"
+        },
+        {
+          "src": "/images/mifa9seat.jpg",
+          "category": "Colors",
+          "title": "Champagne Gold",
+          "description": "Luxury redefined"
+        },
+        {
+          "src": "/images/mifa9family.avif",
+          "category": "Colors",
+          "title": "Deep Blue",
+          "description": "Ocean-inspired elegance"
+        },
+        {
+          "src": "/images/vehicles/mifa9/brown.png",
+          "category": "Colors",
+          "title": "Mocha Brown",
+          "description": "Warm and inviting"
+        },
+        {
+          "src": "/images/vehicles/mifa9/seats.jpg",
+          "category": "Interior",
+          "title": "Executive Seating",
+          "description": "Massage and ventilation functions"
+        },
+        {
+          "src": "/images/vehicles/mifa9/console.jpg",
+          "category": "Interior",
+          "title": "Center Console",
+          "description": "Premium materials and finishes"
+        },
+        {
+          "src": "/images/vehicles/mifa9/lighting.jpg",
+          "category": "Details",
+          "title": "Ambient Lighting",
+          "description": "64-color customizable atmosphere"
+        }
+      ]
+    },
+    {
+      "id": "mifa-7",
+      "slug": "mifa7",
+      "name": "MIFA 7",
+      "fullName": "MAXUS MIFA 7",
+      "type": "Family Electric MPV",
+      "price": "Rs. 1.10 Crore",
+      "tagline": "SMART MOBILITY FOR ALL",
+      "shortDesc": "Designed for modern families, combining exceptional range with versatile space and smart technology.",
+      "description": "The MIFA 7 is the perfect companion for modern families. With its industry-leading 635km range, flexible seating configurations, and family-friendly technology, every journey becomes an adventure. Smart storage solutions and intuitive controls make daily driving effortless. From school runs to weekend getaways, the MIFA 7 adapts to your family's needs.",
+      "image": "/images/mifa7hero.png",
+      "interiorImage": "/images/mifa7interior.jpg",
+      "detailImage": "/images/mifa7detail.jpg",
+      "videoUrl": "/videos/mifa7-hero.mp4",
+      "accentColor": "#C7A86D",
+      "specs": [
+        { "label": "Range (NEDC)", "value": "635", "unit": "KM", "desc": "Longest range in class" },
+        { "label": "Power", "value": "180", "unit": "KW", "desc": "Electric motor output" },
+        { "label": "Torque", "value": "350", "unit": "NM", "desc": "Instant torque delivery" },
+        { "label": "Seating", "value": "6-7", "unit": "SEATS", "desc": "Flexible configuration" },
+        { "label": "Cargo", "value": "1200", "unit": "L", "desc": "Maximum cargo capacity" },
+        { "label": "Battery", "value": "90", "unit": "KWH", "desc": "High-density battery" }
+      ],
+      "features": [
+        "Flexible seating configuration for maximum cargo",
+        "12.3-inch touchscreen infotainment system",
+        "Wireless charging for multiple devices",
+        "360-degree camera with parking assist",
+        "Family-friendly storage solutions",
+        "Panoramic sunroof",
+        "Power sliding doors",
+        "Tri-zone automatic climate control",
+        "Rear-seat entertainment screens",
+        "Multiple USB-C ports for all rows",
+        "Hands-free power tailgate",
+        "Leather upholstery",
+        "Ambient lighting",
+        "Wireless Apple CarPlay and Android Auto"
+      ],
+      "technology": [
+        { 
+          "title": "Long Range", 
+          "desc": "Industry-leading 635km range for worry-free travel across Nepal. Advanced battery technology ensures consistent performance in varying weather conditions." 
+        },
+        { 
+          "title": "Smart Space", 
+          "desc": "Modular seating system adapts from passenger to cargo mode in seconds. Fold-flat second and third-row seats create up to 1200L of cargo space." 
+        },
+        { 
+          "title": "Family Connect", 
+          "desc": "Integrated child monitoring and entertainment system for peace of mind. Rear-seat camera allows front occupants to check on passengers without turning around." 
+        },
+        { 
+          "title": "Efficient Powertrain", 
+          "desc": "Optimized electric motor and battery system delivers class-leading efficiency. Regenerative braking captures energy during deceleration to extend range." 
+        },
+        { 
+          "title": "Smart Climate", 
+          "desc": "Intelligent climate control system with rear-seat vents and individual temperature zones ensures comfort for all passengers." 
+        },
+        { 
+          "title": "Safety Suite", 
+          "desc": "Comprehensive safety features include multiple airbags, electronic stability control, hill start assist, and ISOFIX child seat anchors." 
+        }
+      ],
+      "highlights": [
+        { "icon": "FiBattery", "label": "635 KM", "desc": "Longest range in its class" },
+        { "icon": "FiLayers", "label": "1200 L", "desc": "Maximum cargo capacity" },
+        { "icon": "FiSmartphone", "label": "SMART TECH", "desc": "Family-friendly technology" }
+      ],
+      "colors": ["#FFFFFF", "#1A1A1A", "#4A4A4A", "#C7A86D", "#2D5A4A", "#4A6A8B"],
+      "colorNames": {
+        "#FFFFFF": "Pure White",
+        "#1A1A1A": "Jet Black",
+        "#4A4A4A": "Titanium Grey",
+        "#C7A86D": "Desert Sand",
+        "#2D5A4A": "Forest Green",
+        "#4A6A8B": "Ocean Blue"
+      },
+      "colorImages": {
+        "#FFFFFF": "/images/mifa7white.png",
+        "#1A1A1A": "/images/mifa7black.png",
+        "#4A4A4A": "/images/mifa7grey.png",
+        "#C7A86D": "/images/mifa7sand.png",
+        "#2D5A4A": "/images/mifa7green.png",
+        "#4A6A8B": "/images/mifa7blue.png"
+      },
+      "gallery": [
+        {
+          "src": "/images/mifa7hero.png",
+          "category": "Exterior",
+          "title": "Front Design",
+          "description": "Modern and aerodynamic front fascia"
+        },
+        {
+          "src": "/images/mifa7detail.jpg",
+          "category": "Exterior",
+          "title": "Rear View",
+          "description": "Clean lines with full LED taillights"
+        },
+        {
+          "src": "/images/mifa7interior.jpg",
+          "category": "Interior",
+          "title": "Family Cabin",
+          "description": "Spacious and versatile interior"
+        },
+        {
+          "src": "/images/mifa7white.png",
+          "category": "Colors",
+          "title": "Pure White",
+          "description": "Clean and bright"
+        },
+        {
+          "src": "/images/mifa7black.png",
+          "category": "Colors",
+          "title": "Jet Black",
+          "description": "Sleek and professional"
+        },
+        {
+          "src": "/images/mifa7grey.png",
+          "category": "Colors",
+          "title": "Titanium Grey",
+          "description": "Modern urban appeal"
+        },
+        {
+          "src": "/images/mifa7sand.png",
+          "category": "Colors",
+          "title": "Desert Sand",
+          "description": "Warm and natural"
+        },
+        {
+          "src": "/images/mifa7green.png",
+          "category": "Colors",
+          "title": "Forest Green",
+          "description": "Nature-inspired elegance"
+        },
+        {
+          "src": "/images/mifa7blue.png",
+          "category": "Colors",
+          "title": "Ocean Blue",
+          "description": "Calm and sophisticated"
+        },
+        {
+          "src": "/images/mifa7cargo.jpg",
+          "category": "Utility",
+          "title": "Cargo Mode",
+          "description": "1200L maximum cargo capacity"
+        },
+        {
+          "src": "/images/mifa7seats.jpg",
+          "category": "Interior",
+          "title": "Flexible Seating",
+          "description": "6-7 seat configuration options"
+        },
+        {
+          "src": "/images/mifa7tech.jpg",
+          "category": "Technology",
+          "title": "Infotainment",
+          "description": "12.3-inch touchscreen display"
+        }
+      ]
+    }
+  ],
+  "categories": {
+    "pickup": ["eterron-9"],
+    "luxury-mpv": ["mifa-9"],
+    "family-mpv": ["mifa-7"]
+  },
+  "meta": {
+    "totalVehicles": 3,
+    "lastUpdated": "2024-01-15"
+  }
+}
